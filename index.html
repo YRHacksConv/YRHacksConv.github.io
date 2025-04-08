@@ -9,9 +9,51 @@
             --sidebar-width: 250px;
             --collapsed-width: 80px;
             --primary-color: #4a90e2;
+            --success-color: #4CAF50;
         }
 
-        /* SIDEBAR COLLAPSE STYLES */
+        /* NOTIFICATION STYLES */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            display: none;
+            z-index: 2000;
+            animation: slideIn 0.3s ease, fadeOut 0.5s ease 3s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            z-index: 2000;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        /* REMAINING STYLES FROM BEFORE... */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -38,7 +80,6 @@
             display: block;
         }
 
-        /* ENHANCED LOGO AND BRANDING */
         .logo-image {
             width: 65px;
             height: 65px;
@@ -55,7 +96,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* NAVIGATION STYLES */
         .nav-items ul {
             list-style-type: none;
             padding-left: 0;
@@ -77,7 +117,6 @@
             background-color: #34495e;
         }
 
-        /* COLLAPSE BUTTON STYLES */
         .sidebar-footer {
             margin-top: auto;
             padding: 25px;
@@ -96,7 +135,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* FLOATING BUTTON */
         .floating-new-goal-btn {
             position: fixed;
             bottom: 20px;
@@ -116,7 +154,6 @@
             justify-content: center;
         }
 
-        /* MAIN CONTENT STYLING */
         .main-content {
             margin-left: var(--sidebar-width);
             padding: 30px;
@@ -147,7 +184,6 @@
             cursor: pointer;
         }
 
-        /* COMMENT SYSTEM STYLES */
         .comment-section {
             margin-top: 40px;
             padding: 20px;
@@ -192,7 +228,6 @@
             </ul>
         </nav>
 
-        <!-- COLLAPSE BUTTON -->
         <div class="sidebar-footer">
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         </div>
@@ -212,7 +247,7 @@
             <div class="progress-bar">
                 <div class="progress" style="width: 40%"></div>
             </div>
-            <button class="update-button" onclick="updateProgress('example')">
+            <button class="update-button" onclick="updateProgress()">
                 UPDATE PROGRESS
                 <span class="pending-badge">1</span>
             </button>
@@ -246,13 +281,51 @@
     <!-- FLOATING BUTTON -->
     <button class="floating-new-goal-btn" onclick="showCreateModal()">+</button>
 
+    <!-- NOTIFICATION -->
+    <div class="notification" id="notification"></div>
+
     <script>
-        // Sidebar Toggle Function
+        // Sidebar Toggle
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('collapsed');
             document.querySelector('.toggle-btn').textContent = 
                 sidebar.classList.contains('collapsed') ? '→' : '☰';
+        }
+
+        // Modal Controls
+        function showCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+        }
+
+        function hideCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+        }
+
+        // Goal Creation
+        function createGoal() {
+            const notification = document.getElementById('notification');
+            notification.textContent = "🎉 Goal Created! Check in My Goals";
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3500);
+
+            // Reset form
+            document.getElementById('goalName').value = '';
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            document.getElementById('goalDescription').value = '';
+            hideCreateModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('createModal');
+            if (event.target === modal) {
+                hideCreateModal();
+            }
         }
 
         // Comment System
@@ -282,7 +355,7 @@
             `).join('');
         }
 
-        // Initialize comments
+        // Initialize
         displayComments();
     </script>
 </body>
