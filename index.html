@@ -11,6 +11,30 @@
             --primary-color: #4a90e2;
         }
 
+        /* NEW FLOATING BUTTON STYLES */
+        .floating-new-goal-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+            z-index: 1000;
+        }
+
+        /* UPDATED SIDEBAR TOGGLE POSITION */
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
         /* MAIN CONTENT STYLING */
         .example-goal {
             padding: 40px 30px;
@@ -55,8 +79,6 @@
                 <img src="logo.jpg" alt="Conv Logo" class="logo-image">
                 <h2 class="brand-name">Conv</h2>
             </a>
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
 
         <nav class="nav-items">
@@ -68,6 +90,11 @@
                 <li class="nav-item"><a href="analytics.html">Analytics</a></li>
             </ul>
         </nav>
+
+        <!-- COLLAPSE BUTTON AT BOTTOM OF SIDEBAR -->
+        <div class="sidebar-footer">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        </div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -113,6 +140,9 @@
             </div>
         </div>
     </div>
+
+    <!-- NEW FLOATING BUTTON AT BOTTOM RIGHT -->
+    <button class="floating-new-goal-btn" onclick="showCreateModal()">+</button>
 
     <script src="app.js"></script>
 </body>
