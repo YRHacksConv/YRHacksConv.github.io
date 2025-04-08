@@ -3,8 +3,8 @@
     --success-color: #7ed321;
     --danger-color: #ff4757;
     --bg-color: #2c3e50;
-    --sidebar-width: 250px;
-    --collapsed-width: 60px;
+    --sidebar-width: 250px;      /* Full sidebar width */
+    --collapsed-width: 80px;     /* Collapsed sidebar width */
     --text-color: #333;
 }
 
@@ -16,6 +16,7 @@ body {
     transition: margin-left 0.3s;
 }
 
+/* SIDEBAR */
 .sidebar {
     width: var(--sidebar-width);
     height: 100vh;
@@ -29,13 +30,10 @@ body {
     z-index: 1000;
 }
 
-.sidebar.collapsed {
-    width: var(--collapsed-width);
-}
-
 .sidebar-header {
     padding: 20px;
     text-align: center;
+    position: relative;
 }
 
 .logo-placeholder {
@@ -44,6 +42,22 @@ body {
     background: #fff;
     border-radius: 50%;
     margin: 0 auto 10px;
+}
+
+.brand-name {
+    margin: 0;
+}
+
+/* Toggle button (hamburger) in the top-right corner of the sidebar header */
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
 }
 
 .nav-items {
@@ -62,6 +76,42 @@ body {
     background-color: #34495e;
 }
 
+/* Make "My Goals" link blend in with sidebar text */
+.nav-item a {
+    color: inherit;       /* same color as parent (white) */
+    text-decoration: none;
+}
+
+.nav-item a:hover {
+    text-decoration: underline;
+}
+
+/* NEW GOAL (+) BUTTON INSIDE SIDEBAR */
+.new-goal-btn {
+    position: absolute; 
+    top: 80px;           /* Just below the logo; adjust as desired */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* COLLAPSED SIDEBAR */
+.sidebar.collapsed {
+    width: var(--collapsed-width);
+}
+
+/* Hide nav items when collapsed, so only logo + add button are visible */
+.sidebar.collapsed .nav-items {
+    display: none;
+}
+
+/* MAIN CONTENT */
 .main-content {
     margin-left: var(--sidebar-width);
     padding: 30px;
@@ -69,6 +119,25 @@ body {
     min-height: 100vh;
 }
 
+/* When sidebar is collapsed, shift main content left accordingly */
+.sidebar.collapsed ~ .main-content {
+    margin-left: var(--collapsed-width);
+}
+
+/* BALANCE BADGE */
+.balance {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+/* HEADER STATS AND PROGRESS BAR */
 .progress-header {
     background: white;
     padding: 25px;
@@ -123,18 +192,7 @@ body {
     transition: transform 0.2s;
 }
 
-.balance {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--primary-color);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 25px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-
+/* COMMENTS */
 .comment-section {
     background: #fff;
     border-radius: 15px;
@@ -154,6 +212,7 @@ body {
     border: 1px solid #ddd !important;
 }
 
+/* MODALS */
 .modal {
     display: none;
     position: fixed;
@@ -169,20 +228,7 @@ body {
     width: 90%;
 }
 
-.new-goal-btn {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    color: white;
-    z-index: 1000;
-    border: none;
-    cursor: pointer;
-}
-
+/* NOTIFICATIONS */
 .notification-panel {
     position: fixed;
     bottom: 30px;
@@ -203,9 +249,15 @@ body {
     to { opacity: 0; }
 }
 
-.pending-notification { background: var(--danger-color); }
-.success-notification { background: var(--success-color); }
+.pending-notification {
+    background: var(--danger-color);
+}
 
+.success-notification {
+    background: var(--success-color);
+}
+
+/* GOAL CARDS */
 .goal-card {
     background: white;
     border-radius: 15px;
