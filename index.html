@@ -15,15 +15,25 @@
             justify-content: space-between;
         }
 
-        /* Added spacing between goal and update button */
         .update-button {
-            margin-top: 50px;  /* Increased from 30px */
+            margin-top: 50px;
             align-self: flex-start;
         }
 
-        /* Added margin below progress bar */
         .progress-bar {
             margin: 20px 0 40px 0;
+        }
+
+        /* Sidebar fix */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            background: #2c3e50;
+            padding: 20px;
+            color: white;
         }
     </style>
 </head>  
@@ -37,6 +47,18 @@
             </a>  
             <button class="new-goal-btn" onclick="showCreateModal()">+</button>  
         </div>  
+
+        <nav class="nav-items">  
+            <ul>  
+                <li class="nav-item"><a href="index.html">Home</a></li>  
+                <li class="nav-item"><a href="spectate.html">Spectate</a></li>  
+                <li class="nav-item"><a href="profile.html">My Profile</a></li>  
+                <li class="nav-item"><a href="goals.html">My Goals</a></li>  
+                <li class="nav-item"><a href="analytics.html">Analytics</a></li>  
+            </ul>  
+        </nav>  
+
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>  
     </div>  
 
     <!-- MAIN CONTENT -->  
@@ -81,7 +103,10 @@
             <input type="date" id="startDate" class="form-input">  
             <input type="date" id="endDate" class="form-input">  
             <textarea id="goalDescription" class="form-input" placeholder="Description"></textarea>  
-            <div class="modal-actions">
+            <div class="modal-actions">  
+                <button onclick="createGoal()">Create</button>  
+                <button onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>  
+            </div>  
         </div>  
     </div>  
 
