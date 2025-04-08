@@ -11,7 +11,23 @@
             --primary-color: #4a90e2;
         }
 
-        /* NEW FLOATING BUTTON STYLES */
+        /* SIDEBAR IMPROVEMENTS */
+        .nav-items ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .nav-items a {
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-item {
+            padding: 15px 25px;
+        }
+
+        /* FLOATING BUTTON */
         .floating-new-goal-btn {
             position: fixed;
             bottom: 20px;
@@ -26,13 +42,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             font-size: 1.5rem;
             z-index: 1000;
-        }
-
-        /* UPDATED SIDEBAR TOGGLE POSITION */
-        .sidebar-footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
         }
 
         /* MAIN CONTENT STYLING */
@@ -69,6 +78,13 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
         }
+
+        /* SIDEBAR FOOTER */
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -84,14 +100,14 @@
         <nav class="nav-items">
             <ul>
                 <li class="nav-item"><a href="index.html">Home</a></li>
-                <li class="nav-item"><a href="spectate.html">Spectate</a></li>
+                <li class="nav-item"><a href="spectate.html">Forum</a></li>
                 <li class="nav-item"><a href="profile.html">My Profile</a></li>
                 <li class="nav-item"><a href="goals.html">My Goals</a></li>
                 <li class="nav-item"><a href="analytics.html">Analytics</a></li>
             </ul>
         </nav>
 
-        <!-- COLLAPSE BUTTON AT BOTTOM OF SIDEBAR -->
+        <!-- COLLAPSE BUTTON -->
         <div class="sidebar-footer">
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         </div>
@@ -141,7 +157,7 @@
         </div>
     </div>
 
-    <!-- NEW FLOATING BUTTON AT BOTTOM RIGHT -->
+    <!-- FLOATING BUTTON -->
     <button class="floating-new-goal-btn" onclick="showCreateModal()">+</button>
 
     <script src="app.js"></script>
