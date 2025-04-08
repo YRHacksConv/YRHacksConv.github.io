@@ -322,22 +322,50 @@ h1, .header-title {
   border-bottom: none !important;
 }
 
-.header-logo {
-  width: 24px;       /* Exact width to match original */
-  height: 24px;      /* Exact height to match original */
-  object-fit: contain; /* Prevents distortion */
-  display: block;    /* Ensures proper alignment */
-  margin-right: 8px; /* Space between logo and text */
+/* ======== FIXED LOGO STYLES ======== */
+.logo-image { /* Changed from .header-logo to match HTML class */
+  width: 50px;       /* Match original placeholder size */
+  height: 50px;      /* Match original placeholder size */
+  object-fit: contain;
+  border-radius: 50%; /* Match placeholder style */
+  margin: 0 auto 15px; /* Center logo */
 }
 
 .logo-link {
   display: flex;
-  align-items: center; /* Vertically centers logo and text */
+  flex-direction: column; /* Stack logo and text vertically */
+  align-items: center;
   text-decoration: none;
+  margin-bottom: 25px;
 }
 
 .brand-name {
-  font-size: 1.2rem; /* Match original text size */
-  margin: 0;         /* Remove default margins */
-  color: white;      /* Match original color */
+  font-size: 1.5rem;
+  color: white;
+  margin: 15px 0 0 0; /* Add spacing between logo and text */
+}
+
+/* Remove old logo placeholder styles */
+.logo-placeholder {
+  display: none !important;
+}
+
+/* ======== SIDEBAR HEADER FIX ======== */
+.sidebar-header {
+  padding: 25px 20px;
+  text-align: center;
+  position: relative;
+  min-height: auto; /* Remove fixed height */
+}
+
+/* ======== BUTTON POSITIONING FIX ======== */
+.new-goal-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toggle-btn {
+  display: none; /* Remove if not needed */
 }
