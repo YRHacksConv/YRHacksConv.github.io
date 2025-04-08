@@ -50,7 +50,17 @@
             padding: 40px;
         }
 
-        /* Forum cards styling (kept from previous version) */
+        /* Forum title styling */
+        .forum-title {
+            font-size: 24px;
+            color: #2A3F54;
+            margin-bottom: 30px;
+            font-weight: 600;
+            padding-left: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        /* Forum cards styling */
         .forum-card {
             background: white;
             border-radius: 12px;
@@ -95,6 +105,11 @@
             border-radius: 20px;
             cursor: pointer;
             font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .join-button:hover {
+            background: #45a049;
         }
 
         .progress-bar {
@@ -108,6 +123,7 @@
         .progress-fill {
             height: 100%;
             background: #4CAF50;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
@@ -126,6 +142,8 @@
     <!-- Main content with forum cards -->
     <div class="main-content">
         <div class="forum-container">
+            <h1 class="forum-title">Forum</h1>
+            
             <!-- Alex's Card -->
             <div class="forum-card">
                 <div class="user-header">
