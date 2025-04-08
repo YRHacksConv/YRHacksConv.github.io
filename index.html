@@ -8,21 +8,23 @@
 <body>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-placeholder"></div>
-                <h2 class="brand-name">Conv</h2>
-            </a>
+            <div class="logo-placeholder"></div>
+            <h2 class="brand-name">Conv</h2>
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
             <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
         <ul class="nav-items">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-            <li class="nav-item"><a href="profile.html">My Profile</a></li>
-            <li class="nav-item"><a href="goals.html">My Goals</a></li>
-            <li class="nav-item"><a href="earnings.html">My Earnings</a></li>
-            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-            <li class="nav-item"><a href="settings.html">Settings</a></li>
+            <li class="nav-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="nav-item">Spectate</li>
+            <li class="nav-item">My Profile</li>
+            <li class="nav-item">
+                <a href="goals.html">My Goals</a>
+            </li>
+            <li class="nav-item">My Earnings</li>
+            <li class="nav-item">Analytics</li>
+            <li class="nav-item">Settings</li>
         </ul>
     </div>
 
@@ -34,10 +36,10 @@
         <div class="progress-header">
             <h2 class="project-title" id="pinnedGoalName"></h2>
             <div class="project-meta">
-                <div>Starting date: <span id="startDate"></span></div>
-                <div>Time elapsed: <span id="daysElapsed"></span> days</div>
-                <div>End date: <span id="endDate"></span></div>
-                <div>Revenue: $<span id="revenue">0.00</span></div>
+                <div>Start: <span id="startDate"></span></div>
+                <div>Days: <span id="daysElapsed"></span></div>
+                <div>End: <span id="endDate"></span></div>
+                <div>Updates: <span id="progressCount"></span></div>
             </div>
             <div class="progress-bar">
                 <div class="progress"></div>
@@ -45,10 +47,7 @@
         </div>
 
         <div class="update-section">
-            <button class="update-button" onclick="updateProgress()">
-                UPDATE YOUR PROGRESS
-                <span class="pending-badge" id="pendingBadge">0</span>
-            </button>
+            <button class="update-button" onclick="updateProgress()">UPDATE YOUR PROGRESS</button>
         </div>
 
         <div class="comment-section" id="commentSection">
