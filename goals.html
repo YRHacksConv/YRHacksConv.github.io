@@ -6,11 +6,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="sidebar"> <!-- Same as index.html --> </div>
+    <!-- SIDEBAR (same structure as index, collapsible) -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-placeholder"></div>
+            <h2 class="brand-name">Conv</h2>
 
-    <div class="main-content">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
+        </div>
+        <ul class="nav-items">
+            <li class="nav-item">Spectate</li>
+            <li class="nav-item">My Profile</li>
+            <li class="nav-item">
+                <a href="goals.html">My Goals</a>
+            </li>
+            <li class="nav-item">My Earnings</li>
+            <li class="nav-item">Analytics</li>
+            <li class="nav-item">Settings</li>
+        </ul>
+    </div>
+
+    <div class="main-content" id="mainContent">
         <h1>My Goals</h1>
         <div id="goalsContainer"></div>
+    </div>
+
+    <!-- CREATE NEW GOAL MODAL (same as index) -->
+    <div class="modal" id="createModal">
+        <h2>Create New Goal</h2>
+        <input type="text" id="goalName" placeholder="Goal Name" class="form-input">
+        <input type="date" id="startDate" class="form-input">
+        <input type="date" id="endDate" class="form-input">
+        <textarea id="goalDescription" class="form-input" placeholder="Description"></textarea>
+        <div class="modal-actions">
+            <button onclick="createGoal()">Create</button>
+            <button onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
