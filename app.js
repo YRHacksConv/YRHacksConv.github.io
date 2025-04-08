@@ -13,17 +13,17 @@ function init() {
     renderGoals();  
     updateUI();  
     showWelcomeNotification();  
-    initializeSidebar();
+    initializeSidebar();  
 }  
 
-function initializeSidebar() {
-    document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn')) {
-            document.getElementById('sidebar').classList.remove('collapsed');
-        }
-    });
-}
+function initializeSidebar() {  
+    document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);  
+    document.addEventListener('click', (e) => {  
+        if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn')) {  
+            document.getElementById('sidebar').classList.remove('collapsed');  
+        }  
+    });  
+}  
 
 function renderGoals() {  
     const container = document.getElementById('goalsContainer');  
@@ -59,17 +59,17 @@ function renderGoals() {
 }  
 
 // ======================= UTILITY FUNCTIONS =======================  
-function calculateDaysElapsed(startDate) {
+function calculateDaysElapsed(startDate) {  
     return Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));  
 }  
 
-function calculateProgress(start, end) {
+function calculateProgress(start, end) {  
     const total = (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24);  
     const elapsed = (new Date() - new Date(start)) / (1000 * 60 * 60 * 24);  
     return Math.min((elapsed / total) * 100, 100);  
 }  
 
-function formatDate(dateString) {
+function formatDate(dateString) {  
     return new Date(dateString).toLocaleDateString('en-US', {  
         month: 'short',  
         day: 'numeric',  
@@ -77,7 +77,7 @@ function formatDate(dateString) {
     });  
 }  
 
-function calculateRevenue(updates) {
+function calculateRevenue(updates) {  
     return (updates.length * 5).toFixed(2);  
 }  
 
@@ -112,12 +112,10 @@ function createGoal() {
         pinned: state.goals.length === 0  
     };  
 
-    // Strict duplicate name check
-    const existingNames = state.goals.map(goal => goal.name.trim().toLowerCase());
-    if (existingNames.includes(newGoal.name.toLowerCase())) {
-        showNotification('This goal name already exists! Please use a unique name.', 'danger');
-        return;
-    }
+    if (state.goals.some(goal => goal.name.toLowerCase() === newGoal.name.toLowerCase())) {  
+        showNotification('This goal name already exists!', 'danger');  
+        return;  
+    }  
 
     state.goals.push(newGoal);  
     saveState();  
@@ -127,19 +125,35 @@ function createGoal() {
 }  
 
 function validateGoalForm({name, startDate, endDate}) {  
+    let isValid = true;  
+
+    // Name validation
     if (!name.value.trim()) {  
         showNotification('Goal name is required', 'danger');  
-        return false;  
+        isValid = false;  
     }  
-    if (!startDate.value || !endDate.value) {  
-        showNotification('Dates are required', 'danger');  
-        return false;  
+
+    // Start date validation
+    if (!startDate.value) {  
+        showNotification('Start date is required', 'danger');  
+        isValid = false;  
     }  
-    if (new Date(startDate.value) > new Date(endDate.value)) {  
-        showNotification('End date must be after start date', 'danger');  
-        return false;  
+
+    // End date validation
+    if (!endDate.value) {  
+        showNotification('End date is required', 'danger');  
+        isValid = false;  
     }  
-    return true;  
+
+    // Date comparison validation
+    if (startDate.value && endDate.value) {  
+        if (new Date(startDate.value) > new Date(endDate.value)) {  
+            showNotification('End date must be after start date', 'danger');  
+            isValid = false;  
+        }  
+    }  
+
+    return isValid;  
 }  
 
 function calculateTotalDays(start, end) {  
@@ -219,7 +233,10 @@ function showNotification(message, type = 'success') {
     notification.className = `notification-panel ${type}-notification`;  
     notification.textContent = message;  
     document.body.appendChild(notification);  
-    setTimeout(() => notification.remove(), 3500);  
+    
+    setTimeout(() => {  
+        notification.remove();  
+    }, 3000);  
 }  
 
 function showWelcomeNotification() {  
