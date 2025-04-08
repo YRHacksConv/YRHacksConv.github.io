@@ -212,6 +212,38 @@ body {
     border: 2px solid var(--primary-color) !important;  
 }  
 
+/* ======== NOTIFICATION SYSTEM ======== */
+.notification-panel {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    z-index: 9999;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
+}
+
+.success-notification {
+    background: #4CAF50;
+}
+
+.danger-notification {
+    background: #f44336;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
 /* ======== MISC COMPONENTS ======== */  
 .balance {  
     position: fixed;  
@@ -238,34 +270,6 @@ body {
     z-index: 1001;  
     max-width: 500px;  
     width: 90%;  
-}  
-
-.notification-panel {  
-    position: fixed;  
-    bottom: 30px;  
-    right: 30px;  
-    padding: 15px 25px;  
-    border-radius: 10px;  
-    color: white;  
-    animation: slideIn 0.5s ease, fadeOut 1s ease 4s forwards;  
-}  
-
-@keyframes slideIn {  
-    from { transform: translateX(100%); }  
-    to { transform: translateX(0); }  
-}  
-
-@keyframes fadeOut {  
-    from { opacity: 1; }  
-    to { opacity: 0; }  
-}  
-
-.pending-notification {  
-    background: var(--danger-color);  
-}  
-
-.success-notification {  
-    background: var(--success-color);  
 }  
 
 .example-goal {  
@@ -308,78 +312,52 @@ body {
     font-size: 0.9em;  
 }  
 
-#Conv { /* If it's using an ID */
-  color: white !important;
-}
+#Conv {  
+  color: white !important;  
+  text-decoration: none !important;  
+  border-bottom: none !important;  
+}  
 
-/* OR if it's a class or HTML element */
-h1, .header-title { 
-  color: white !important;
-}
+.logo-image {  
+  width: 50px;  
+  height: 50px;  
+  object-fit: contain;  
+  border-radius: 50%;  
+  margin: 0 auto 15px;  
+}  
 
-#Conv {
-  text-decoration: none !important;
-  border-bottom: none !important;
-}
+.logo-link {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  text-decoration: none;  
+  margin-bottom: 25px;  
+}  
 
-/* ======== QUICK FIXES FOR OVERSIZED ELEMENTS ======== */
-/* Base font size reduction */
-body {
-  font-size: 14px !important;
-}
+.brand-name {  
+  font-size: 1.5rem;  
+  color: white;  
+  margin: 15px 0 0 0;  
+}  
 
-/* Header sizing fixes */
-.brand-name {
-  font-size: 1.2rem !important;
-  margin: 10px 0 !important;
-}
+.logo-placeholder {  
+  display: none !important;  
+}  
 
-/* Navigation menu fixes */
-.nav-items {
-  font-size: 0.9rem !important;
-  padding-left: 15px !important;
-}
+.sidebar-header {  
+  padding: 25px 20px;  
+  text-align: center;  
+  position: relative;  
+  min-height: auto;  
+}  
 
-.nav-item {
-  padding: 8px 15px !important;
-}
+.new-goal-btn {  
+  position: absolute;  
+  bottom: 20px;  
+  left: 50%;  
+  transform: translateX(-50%);  
+}  
 
-/* Goal section sizing */
-.example-goal {
-  padding: 20px !important;
-  min-height: auto !important;
-}
-
-.example-goal h2 {
-  font-size: 1.3rem !important;
-  margin-bottom: 10px !important;
-}
-
-/* Progress section fixes */
-.update-button {
-  margin-top: 20px !important;
-  padding: 10px 20px !important;
-  font-size: 0.9rem !important;
-}
-
-.progress-bar {
-  margin: 10px 0 20px 0 !important;
-  height: 20px !important;
-}
-
-/* Comments section fixes */
-.comment-section h4 {
-  font-size: 1rem !important;
-}
-
-.comment-input-group input {
-  padding: 8px !important;
-  font-size: 0.9rem !important;
-}
-
-.comment-btn {
-  padding: 8px 15px !important;
-  font-size: 0.85rem !important;
-}
-  display: none; /* Remove if not needed */
+.toggle-btn {  
+  display: none;  
 }
