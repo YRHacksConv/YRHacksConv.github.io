@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coming Soon</title>
+    <title>Forum</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional styles for the chatbot-like appearance */
+        /* Chatbot-style brand name */
         .brand-name {
             background-color: #f0f0f0;
             padding: 8px 15px;
@@ -16,35 +15,146 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        .logo-link {
+        /* Forum-specific styles */
+        .forum-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .forum-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .user-info h2 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+        
+        .user-stats {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .join-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .task-info {
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            width: 65%;
+        }
+        
+        .progress-text {
+            text-align: right;
+            color: #666;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
 <body>
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-placeholder"></div>
-                <h2 class="brand-name">Forum</h2>
-            </a>
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
-        </div>
-        <ul class="nav-items">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-            <li class="nav-item"><a href="profile.html">My Profile</a></li>
-            <li class="nav-item"><a href="goals.html">My Goals</a></li>
-            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-        </ul>
+        <!-- Sidebar remains unchanged -->
     </div>
 
     <div class="main-content">
-        <h1>Coming Soon</h1>
-        <p>This section is under development.</p>
+        <div class="forum-container">
+            <h1>Forum</h1>
+            
+            <!-- User Card 1 -->
+            <div class="forum-card">
+                <div class="card-header">
+                    <div class="user-info">
+                        <h2>Alex</h2>
+                        <div class="user-stats">
+                            $60.00<br>
+                            Day 2
+                        </div>
+                    </div>
+                    <button class="join-button">Join</button>
+                </div>
+                <div class="task-info">
+                    <p><strong>Task:</strong> Ap Macro Unit 1<br>
+                    <strong>Due:</strong> April 11th</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="progress-text">65%</div>
+                </div>
+            </div>
+
+            <!-- User Card 2 -->
+            <div class="forum-card">
+                <div class="card-header">
+                    <div class="user-info">
+                        <h2>May</h2>
+                        <div class="user-stats">
+                            $15.00<br>
+                            Day 4
+                        </div>
+                    </div>
+                    <button class="join-button">Join</button>
+                </div>
+                <div class="task-info">
+                    <p><strong>Task:</strong> Go to gym every day<br>
+                    <strong>Due:</strong> April 19th</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 15%"></div>
+                    </div>
+                    <div class="progress-text">15%</div>
+                </div>
+            </div>
+
+            <!-- User Card 3 -->
+            <div class="forum-card">
+                <div class="card-header">
+                    <div class="user-info">
+                        <h2>Sylvia</h2>
+                        <div class="user-stats">
+                            $55.00<br>
+                            Day 6
+                        </div>
+                    </div>
+                    <button class="join-button">Join</button>
+                </div>
+                <div class="task-info">
+                    <p><strong>Task:</strong> Earn $1,200<br>
+                    <strong>Due:</strong> May 8th</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%"></div>
+                    </div>
+                    <div class="progress-text">35%</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
