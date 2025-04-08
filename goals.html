@@ -3,129 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>My Goals</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-        }
-
-        /* Dark Blue Sidebar */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #2A3F54;
-            padding: 30px;
-            color: white;
-        }
-
-        .nav-items {
-            list-style: none;
-            padding: 0;
-            margin-top: 40px;
-        }
-
-        .nav-item {
-            margin: 25px 0;
-        }
-
-        .nav-item a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 40px;
-            background-color: #f8f9fa;
-        }
-
-        .goal-section {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
+        /* Page-specific styles */
         .goal-header {
             font-size: 20px;
             margin-bottom: 15px;
-            color: #333;
+            color: #2A3F54;
+            font-weight: 600;
         }
 
         .goal-details {
             color: #666;
             line-height: 1.6;
             margin-bottom: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
 
-        /* New Progress Bar Styles */
         .progress-container {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin: 15px 0;
-        }
-
-        .progress-bar {
-            flex-grow: 1;
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #2196F3;
-            width: 65%;
-            transition: width 0.3s ease;
+            margin: 20px 0;
         }
 
         .progress-percent {
-            color: #2196F3;
+            color: var(--primary-color);
             font-weight: 500;
+            min-width: 45px;
         }
 
-        .update-button {
-            background-color: #4CAF50;
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 25px;
-            border-radius: 4px;
-            margin-top: 15px;
+            font-size: 24px;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .fab:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
-    <!-- Dark Blue Sidebar -->
+    <!-- Unified Sidebar -->
     <nav class="sidebar">
         <h2>Conv</h2>
         <ul class="nav-items">
-            <li class="nav-item"><a href="#">Home</a></li>
-            <li class="nav-item"><a href="#">Spectate</a></li>
-            <li class="nav-item"><a href="#">My Profile</a></li>
-            <li class="nav-item"><a href="#">My Goals</a></li>
-            <li class="nav-item"><a href="#">Analytics</a></li>
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
+            <li class="nav-item"><a href="profile.html">My Profile</a></li>
+            <li class="nav-item"><a href="goals.html">My Goals</a></li>
+            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
         </ul>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <h1>My Goals</h1>
+        <h1 class="section-title">My Goals</h1>
 
         <!-- Goal 1 -->
-        <div class="goal-section">
+        <div class="section">
             <div class="goal-header">Project Alpha</div>
             <div class="goal-details">
-                <div>Start: 2024-04-01</div>
-                <div>End: 2024-06-30</div>
-                <div>Days: 45</div>
-                <div>Revenue: $5,00.00</div>
+                <div><strong>Start:</strong> 2024-04-01</div>
+                <div><strong>End:</strong> 2024-06-30</div>
+                <div><strong>Days:</strong> 45</div>
+                <div><strong>Revenue:</strong> $5,000.00</div>
             </div>
             <div class="progress-container">
                 <div class="progress-bar">
@@ -137,13 +94,13 @@
         </div>
 
         <!-- Goal 2 -->
-        <div class="goal-section">
+        <div class="section">
             <div class="goal-header">Fitness Challenge</div>
             <div class="goal-details">
-                <div>Start: 2024-03-15</div>
-                <div>End: 2024-05-15</div>
-                <div>Days: 25</div>
-                <div>Revenue: $12.00</div>
+                <div><strong>Start:</strong> 2024-03-15</div>
+                <div><strong>End:</strong> 2024-05-15</div>
+                <div><strong>Days:</strong> 25</div>
+                <div><strong>Revenue:</strong> $12.00</div>
             </div>
             <div class="progress-container">
                 <div class="progress-bar">
@@ -155,13 +112,13 @@
         </div>
 
         <!-- Goal 3 -->
-        <div class="goal-section">
+        <div class="section">
             <div class="goal-header">E-commerce Launch</div>
             <div class="goal-details">
-                <div>Start: 2024-05-01</div>
-                <div>End: 2024-08-31</div>
-                <div>Days: 122</div>
-                <div>Revenue: $1000.00</div>
+                <div><strong>Start:</strong> 2024-05-01</div>
+                <div><strong>End:</strong> 2024-08-31</div>
+                <div><strong>Days:</strong> 122</div>
+                <div><strong>Revenue:</strong> $1000.00</div>
             </div>
             <div class="progress-container">
                 <div class="progress-bar">
@@ -172,5 +129,8 @@
             <button class="update-button">UPDATE PROGRESS</button>
         </div>
     </div>
+
+    <!-- Add Goal Floating Button -->
+    <button class="fab">+</button>
 </body>
 </html>
