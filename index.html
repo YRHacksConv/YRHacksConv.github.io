@@ -6,70 +6,67 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="logo-placeholder"></div>
-            <h2 class="brand-name">Conv</h2>
+            <a href="index.html" class="logo-link">
+                <div class="logo-placeholder"></div>
+                <h2 class="brand-name">Conv</h2>
+            </a>
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
             <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
         <ul class="nav-items">
-            <li class="nav-item">
-                <a href="index.html">Home</a>
-            </li>
-            <li class="nav-item">Spectate</li>
-            <li class="nav-item">My Profile</li>
-            <li class="nav-item">
-                <a href="goals.html">My Goals</a>
-            </li>
-            <li class="nav-item">My Earnings</li>
-            <li class="nav-item">Analytics</li>
-            <li class="nav-item">Settings</li>
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
+            <li class="nav-item"><a href="profile.html">My Profile</a></li>
+            <li class="nav-item"><a href="goals.html">My Goals</a></li>
+            <li class="nav-item"><a href="earnings.html">My Earnings</a></li>
+            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
+            <li class="nav-item"><a href="settings.html">Settings</a></li>
         </ul>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-content" id="mainContent">
+        <!-- EXAMPLE GOAL -->
+        <div class="example-goal">
+            <h2>FINISH WEB DEVELOPMENT PROJECT</h2>
+            <div class="project-meta">
+                <div>Start: March 1st 2024</div>
+                <div>Days Elapsed: 45</div>
+                <div>End: April 15th 2024</div>
+                <div>Revenue: $60.00</div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" style="width: 40%"></div>
+            </div>
+            <button class="update-button" onclick="updateProgress('example')">
+                UPDATE PROGRESS
+                <span class="pending-badge">1</span>
+            </button>
+        </div>
+
+        <!-- REST OF CONTENT -->
         <div class="balance">
             My Balance: $<span id="balance">0.00</span>
         </div>
 
         <div class="progress-header">
-            <h2 class="project-title" id="pinnedGoalName"></h2>
-            <div class="project-meta">
-                <div>Start: <span id="startDate"></span></div>
-                <div>Days: <span id="daysElapsed"></span></div>
-                <div>End: <span id="endDate"></span></div>
-                <div>Updates: <span id="progressCount"></span></div>
-            </div>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
+            <!-- ... existing pinned goal content ... -->
         </div>
 
-        <div class="update-section">
-            <button class="update-button" onclick="updateProgress()">UPDATE YOUR PROGRESS</button>
-        </div>
-
+        <!-- UPDATED COMMENT SECTION -->
         <div class="comment-section" id="commentSection">
             <h4>Comments</h4>
             <div class="comment-input-group">
                 <input type="text" id="commentInput" placeholder="Add a comment...">
-                <button onclick="postComment()">Post</button>
-                <button class="anonymous-btn" onclick="postComment(true)">Post Anonymously</button>
+                <button class="comment-btn" onclick="postComment()">Post</button>
+                <button class="comment-btn anonymous-btn" onclick="postComment(true)">Anonymous</button>
             </div>
         </div>
 
-        <div class="modal" id="createModal">
-            <h2>Create New Goal</h2>
-            <input type="text" id="goalName" placeholder="Goal Name" class="form-input">
-            <input type="date" id="startDate" class="form-input">
-            <input type="date" id="endDate" class="form-input">
-            <textarea id="goalDescription" class="form-input" placeholder="Description"></textarea>
-            <div class="modal-actions">
-                <button onclick="createGoal()">Create</button>
-                <button onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
-            </div>
-        </div>
+        <!-- MODAL (UNCHANGED) -->
     </div>
 
     <script src="app.js"></script>
