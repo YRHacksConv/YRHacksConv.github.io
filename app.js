@@ -5,12 +5,12 @@ let state = {
     pendingUpdates: JSON.parse(localStorage.getItem('pendingUpdates')) || 0  
 };  
 
-// ======================= NEW: CAMERA STREAM REFERENCE =======================  
+// ======================= CAMERA STREAM REFERENCE =======================  
 let cameraStream = null;  
 
 // ======================= CORE FUNCTIONS =======================  
 function init() {  
-    setActivePage(); // NEW: Active page highlighting  
+    setActivePage();  
     renderGoals();  
     updateUI();  
     showWelcomeNotification();  
@@ -22,7 +22,12 @@ function renderGoals() {
     const container = document.getElementById('goalsContainer');  
     container.innerHTML = '';  
 
-    state.goals.forEach(goal => {  
+    // DUPLICATE PREVENTION - NEW CODE
+    const uniqueGoals = [...new Map(
+        state.goals.map(goal => [goal.id, goal])
+    ).values()];
+
+    uniqueGoals.forEach(goal => {  
         const daysElapsed = Math.floor((new Date() - new Date(goal.startDate)) / (1000 * 60 * 60 * 24));  
         const goalCard = document.createElement('div');  
         goalCard.className = `goal-card ${goal.pinned ? 'pinned-goal' : ''}`;  
@@ -46,7 +51,7 @@ function renderGoals() {
     });  
 }  
 
-// ======================= NEW: ACTIVE PAGE HIGHLIGHTING =======================  
+// ======================= ACTIVE PAGE HIGHLIGHTING =======================  
 function setActivePage() {  
     const currentPage = window.location.pathname.split("/").pop();  
     document.querySelectorAll('.nav-item a').forEach(link => {  
@@ -87,7 +92,7 @@ function createGoal() {
     const endDate = document.getElementById('endDate').value;  
     const description = document.getElementById('goalDescription').value;  
 
-    const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));  
+    const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);  
 
     const newGoal = {  
         id: Date.now().toString(),  
@@ -108,7 +113,7 @@ function createGoal() {
     renderGoals();  
 }  
 
-// ======================= NEW: CAMERA HANDLING =======================  
+// ======================= CAMERA HANDLING =======================  
 async function handleCameraAccess(goalId) {  
     try {  
         cameraStream = await navigator.mediaDevices.getUserMedia({  
@@ -141,11 +146,11 @@ function completeProgressUpdate(goalId) {
     showNotification('Progress verified!', 'success');  
 }  
 
-// ======================= UPDATED: PROGRESS SYSTEM =======================  
+// ======================= PROGRESS SYSTEM =======================  
 function updateProgress(goalId) {  
     if (!goalId) {  
         const pinnedGoal = state.goals.find(g => g.pinned);  
-        goalId = pinnedGoal?.id || 'example'; // Supports sample goal  
+        goalId = pinnedGoal?.id || 'example';  
     }  
     handleCameraAccess(goalId);  
 }  
