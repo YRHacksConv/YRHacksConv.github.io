@@ -11,29 +11,54 @@
             --primary-color: #4a90e2;
         }
 
+        /* SIDEBAR COLLAPSE STYLES */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            background: #2c3e50;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+
+        .sidebar.collapsed {
+            width: var(--collapsed-width);
+        }
+
+        .sidebar.collapsed .brand-name,
+        .sidebar.collapsed .nav-items,
+        .sidebar.collapsed .logo-link {
+            display: none;
+        }
+
+        .sidebar.collapsed .logo-image {
+            width: 50px;
+            height: 50px;
+            margin: 15px auto;
+            display: block;
+        }
+
         /* ENHANCED LOGO AND BRANDING */
         .logo-image {
-            width: 65px !important;  /* Increased from 50px */
-            height: 65px !important;
-            margin: 0 auto 20px !important;
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 20px;
+            display: block;
+            transition: all 0.3s ease;
         }
 
         .brand-name {
-            font-size: 2rem !important;  /* Increased from 1.5rem */
-            margin: 15px 0 !important;
-            letter-spacing: 0.5px;
+            font-size: 2rem;
+            margin: 15px 0;
+            text-align: center;
+            color: white;
+            transition: opacity 0.3s ease;
         }
 
-        /* SIDEBAR IMPROVEMENTS */
+        /* NAVIGATION STYLES */
         .nav-items ul {
             list-style-type: none;
             padding-left: 0;
-        }
-
-        .nav-items a {
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
         }
 
         .nav-item {
@@ -41,65 +66,18 @@
             transition: background 0.3s ease;
         }
 
-        /* FLOATING BUTTON */
-        .floating-new-goal-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 70px;  /* Slightly larger */
-            height: 70px;
-            border-radius: 50%;
-            background: var(--primary-color);
+        .nav-item a {
+            font-size: 1.2rem;
             color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            font-size: 2rem;  /* Larger "+" symbol */
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-decoration: none;
+            display: block;
         }
 
-        /* MAIN CONTENT STYLING */
-        .example-goal {
-            padding: 40px 30px;
-            margin-bottom: 30px;
-            min-height: 220px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        .nav-item:hover {
+            background-color: #34495e;
         }
 
-        .update-button {
-            margin-top: 50px;
-            align-self: flex-start;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-        }
-
-        .progress-bar {
-            margin: 20px 0 40px 0;
-        }
-
-        /* BALANCE DISPLAY */
-        .balance {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-            font-size: 1.1rem;
-        }
-
-        /* SIDEBAR FOOTER */
+        /* COLLAPSE BUTTON STYLES */
         .sidebar-footer {
             margin-top: auto;
             padding: 25px;
@@ -107,8 +85,90 @@
         }
 
         .toggle-btn {
-            font-size: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
             padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* FLOATING BUTTON */
+        .floating-new-goal-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* MAIN CONTENT STYLING */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            transition: margin-left 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .sidebar.collapsed ~ .main-content {
+            margin-left: var(--collapsed-width);
+        }
+
+        .example-goal {
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .update-button {
+            margin-top: 50px;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        /* COMMENT SYSTEM STYLES */
+        .comment-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .comment-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .comment-btn {
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -166,9 +226,7 @@
                 <button class="comment-btn" onclick="postComment()">Post</button>
                 <button class="comment-btn anonymous-btn" onclick="postComment(true)">Anonymous</button>
             </div>
-            <div class="comments-container" id="commentsContainer">
-                <!-- Comments will be dynamically inserted here -->
-            </div>
+            <div class="comments-container" id="commentsContainer"></div>
         </div>
 
         <!-- CREATE GOAL MODAL -->
@@ -189,10 +247,29 @@
     <button class="floating-new-goal-btn" onclick="showCreateModal()">+</button>
 
     <script>
-        // Comment System Functionality
-        let comments = [
-            {text: "First comment example!", author: "System", date: new Date().toLocaleString()}
-        ];
+        // Sidebar Toggle Function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.toggle-btn').textContent = 
+                sidebar.classList.contains('collapsed') ? '→' : '☰';
+        }
+
+        // Comment System
+        let comments = [];
+        function postComment(isAnonymous = false) {
+            const input = document.getElementById('commentInput');
+            if (input.value.trim()) {
+                const comment = {
+                    text: input.value,
+                    author: isAnonymous ? 'Anonymous' : 'You',
+                    date: new Date().toLocaleString()
+                };
+                comments.push(comment);
+                input.value = '';
+                displayComments();
+            }
+        }
 
         function displayComments() {
             const container = document.getElementById('commentsContainer');
@@ -203,19 +280,6 @@
                     <small>${comment.date}</small>
                 </div>
             `).join('');
-        }
-
-        function postComment(isAnonymous = false) {
-            const input = document.getElementById('commentInput');
-            if (input.value.trim()) {
-                comments.push({
-                    text: input.value,
-                    author: isAnonymous ? 'Anonymous' : 'You',
-                    date: new Date().toLocaleString()
-                });
-                input.value = '';
-                displayComments();
-            }
         }
 
         // Initialize comments
