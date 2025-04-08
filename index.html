@@ -20,7 +20,7 @@
             transition: margin-left 0.3s;
         }
 
-        /* Sidebar Styles */
+        /* Enhanced Sidebar Styles */
         .sidebar {
             height: 100%;
             width: var(--sidebar-width);
@@ -39,9 +39,16 @@
             width: var(--collapsed-width);
         }
 
+        .sidebar.collapsed .nav-text,
+        .sidebar.collapsed .brand-name,
+        .sidebar.collapsed .new-goal-btn span {
+            display: none;
+        }
+
         .sidebar-header {
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         .logo-placeholder {
@@ -49,7 +56,7 @@
             height: 40px;
             background: #fff;
             border-radius: 50%;
-            margin: 0 auto;
+            margin: 0 auto 10px;
         }
 
         .nav-items {
@@ -61,26 +68,17 @@
         .nav-item {
             padding: 15px 25px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
             transition: 0.2s;
-            white-space: nowrap;
         }
 
         .nav-item:hover {
             background-color: #34495e;
         }
 
-        .toggle-btn {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        /* Main Content Area */
+        /* Improved Main Content */
         .main-content {
             margin-left: var(--sidebar-width);
             padding: 20px;
@@ -93,36 +91,34 @@
             margin-left: var(--collapsed-width);
         }
 
-        /* Original Styles Preserved Below */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+        /* Project Header */
+        .project-header {
+            margin: -10px 0 20px;
             padding: 15px;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        .goal-list {
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Enhanced Progress Section */
+        .progress-container {
+            margin: 25px 0;
+            padding: 20px;
             background: white;
             border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .goal-item {
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 8px;
-            background: #fff;
-            transition: transform 0.2s;
-            border: 1px solid #eee;
-        }
-
-        .goal-item:hover {
-            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .progress-bar {
@@ -139,6 +135,7 @@
             transition: width 0.5s ease;
         }
 
+        /* Days Visualization */
         .days-container {
             display: flex;
             gap: 8px;
@@ -160,6 +157,7 @@
             color: white;
         }
 
+        /* Balance & Interactive Elements */
         .balance {
             position: fixed;
             top: 20px;
@@ -187,49 +185,63 @@
             transform: translateY(-1px);
         }
 
+        /* Comment Section */
         .comment-section {
-            margin-top: 15px;
-            padding: 15px;
+            margin-top: 25px;
+            padding: 20px;
             background: #f8f9fa;
-            border-radius: 8px;
+            border-radius: 10px;
         }
 
         .comment {
             margin: 10px 0;
-            padding: 10px;
+            padding: 15px;
             background: white;
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        .donate-section {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        input[type="number"] {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            width: 100px;
-        }
-
+        /* Modal & Form Elements */
         .modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 20px;
+            padding: 30px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
             z-index: 100;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-placeholder"></div>
@@ -237,14 +249,30 @@
         </div>
         
         <ul class="nav-items">
-            <li class="nav-item">My Profile</li>
-            <li class="nav-item">My Goals</li>
-            <li class="nav-item">My Earnings</li>
-            <li class="nav-item">Analytics</li>
-            <li class="nav-item">Settings</li>
+            <li class="nav-item">
+                <span class="nav-text">Spectate</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-text">My Profile</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-text">My Goals</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-text">My Earnings</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-text">Analytics</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-text">Settings</span>
+            </li>
         </ul>
 
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <button class="new-goal-btn" onclick="showCreateModal()">
+            <span>+ New Goal</span>
+        </button>
     </div>
 
     <!-- Main Content -->
@@ -253,31 +281,32 @@
             My Balance: $<span id="balance">300.00</span>
         </div>
 
-        <div class="nav">
-            <h1 style="color: var(--primary-color);">Goal Achiever</h1>
-            <button onclick="showCreateModal()">+ Create New Goal</button>
+        <!-- Project Header -->
+        <div class="project-header">
+            <div class="project-title">Complete Web Development Project [E3.0.8]</div>
+            <div class="project-meta">
+                <div>Start Date: March 1, 2024</div>
+                <div>Current Progress: Day 3/10</div>
+            </div>
         </div>
 
-        <div class="modal" id="createModal">
-            <h2>Create New Goal</h2>
-            <input type="text" placeholder="Goal Title" id="goalTitle" class="form-input">
-            <textarea placeholder="Goal Description" id="goalDesc" class="form-input"></textarea>
-            <button onclick="createNewGoal()">Create Goal</button>
-            <button onclick="hideCreateModal()">Cancel</button>
+        <!-- Progress Section -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" style="width: 30%"></div>
+            </div>
+            <div class="days-container">
+                <div class="day">1.9</div>
+                <div class="day">2.7</div>
+                <div class="day">3.6</div>
+                <div class="day">4.1</div>
+                <div class="day">5.0</div>
+            </div>
         </div>
 
+        <!-- Interaction Section -->
         <div class="goal-list">
             <div class="goal-item">
-                <h3>Complete Web Development Project [E3.0.8] [Day3]</h3>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 30%"></div>
-                </div>
-                <div class="days-container">
-                    <div class="day">D1.9</div>
-                    <div class="day">D2.7</div>
-                    <div class="day">D3.6</div>
-                </div>
-                
                 <div class="donate-section">
                     <input type="number" placeholder="Amount" id="donateAmount" min="1" max="300">
                     <button onclick="makeDonation()">Donate</button>
@@ -288,15 +317,29 @@
                     <div class="comment">
                         <strong>John:</strong> Great progress! Keep it up!
                     </div>
+                    <div class="comment">
+                        <strong>Sarah:</strong> Looking forward to the final result!
+                    </div>
                     <input type="text" placeholder="Add a comment..." id="commentInput">
                     <button onclick="postComment()">Post Comment</button>
                 </div>
             </div>
         </div>
+
+        <!-- Create Goal Modal -->
+        <div class="modal" id="createModal">
+            <h2>Create New Goal</h2>
+            <input type="text" placeholder="Goal Title" id="goalTitle" class="form-input">
+            <textarea placeholder="Goal Description" id="goalDesc" class="form-input" rows="4"></textarea>
+            <div style="margin-top: 20px; text-align: right;">
+                <button onclick="createNewGoal()">Create Goal</button>
+                <button onclick="hideCreateModal()" style="margin-left: 10px; background: var(--danger-color)">Cancel</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Sidebar Toggle Function
+        // Sidebar Management
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('mainContent');
@@ -307,7 +350,7 @@
             toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '»' : '☰';
         }
 
-        // Original Functions Preserved
+        // Goal Management
         let balance = 300.00;
         let currentProgress = 30;
 
@@ -322,20 +365,27 @@
         function createNewGoal() {
             const title = document.getElementById('goalTitle').value;
             const desc = document.getElementById('goalDesc').value;
-            hideCreateModal();
+            if(title) {
+                // Add goal creation logic here
+                hideCreateModal();
+            }
         }
 
+        // Donation System
         function makeDonation() {
             const amount = parseFloat(document.getElementById('donateAmount').value);
             if (amount > balance) {
                 alert('Insufficient balance!');
                 return;
             }
-            balance -= amount;
-            document.getElementById('balance').textContent = balance.toFixed(2);
-            alert(`Thank you for donating $${amount}!`);
+            if(amount > 0) {
+                balance -= amount;
+                document.getElementById('balance').textContent = balance.toFixed(2);
+                alert(`Thank you for donating $${amount}!`);
+            }
         }
 
+        // Comment System
         function postComment() {
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
@@ -349,6 +399,7 @@
             }
         }
 
+        // Progress Simulation
         setInterval(() => {
             if (currentProgress < 100) {
                 currentProgress += Math.random() * 2;
@@ -357,6 +408,7 @@
             }
         }, 3000);
 
+        // Modal Close Logic
         window.onclick = function(event) {
             if (event.target.className === 'modal') {
                 event.target.style.display = 'none';
