@@ -41,7 +41,6 @@
                 <h2 class="brand-name">Conv</h2>
             </a>
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
 
         <nav class="nav-items">
@@ -59,23 +58,9 @@
     <div class="main-content" id="mainContent">
         <div class="goals-header">
             <h1>My Goals</h1>
-            <button class="new-goal-btn mobile" onclick="showCreateModal()">+ New Goal</button>
         </div>
         
         <div id="goalsContainer"></div>
-
-        <!-- CREATE GOAL MODAL -->
-        <div class="modal" id="createModal">
-            <h2>Create New Goal</h2>
-            <input type="text" id="goalName" placeholder="Goal Name" class="form-input" required>
-            <input type="date" id="startDate" class="form-input" required>
-            <input type="date" id="endDate" class="form-input" required>
-            <textarea id="goalDescription" class="form-input" placeholder="Description (optional)"></textarea>
-            <div class="modal-actions">
-                <button onclick="createGoal()">Create Goal</button>
-                <button class="cancel-btn" onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
-            </div>
-        </div>
     </div>
 
     <script src="app.js"></script>
