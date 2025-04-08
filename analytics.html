@@ -2,33 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coming Soon</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Analytics</title>
+    <style>
+        /* Main layout styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+
+        /* Dark blue sidebar styling */
+        .sidebar {
+            width: 280px;
+            background-color: #2A3F54;
+            padding: 40px 30px;
+            color: white;
+        }
+
+        .nav-items {
+            list-style: none;
+            padding: 0;
+            margin: 40px 0;
+        }
+
+        .nav-item {
+            margin: 25px 0;
+        }
+
+        .nav-item a {
+            color: #E4E7EA;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            opacity: 0.9;
+        }
+
+        /* Main content styling */
+        .main-content {
+            flex: 1;
+            padding: 50px;
+            background-color: white;
+        }
+
+        .analytics-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #2A3F54;
+            margin-bottom: 25px;
+        }
+
+        .goals-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .goal-item {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #4CAF50 30%,
+                #2196F3 30% 70%,
+                #ff9800 70%
+            );
+            margin: 20px 0;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-placeholder"></div>
-                <h2 class="brand-name">Conv</h2>
-            </a>
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
-        </div>
+    <!-- Dark Blue Sidebar -->
+    <nav class="sidebar">
+        <h2>Conv</h2>
         <ul class="nav-items">
             <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
+            <li class="nav-item"><a href="forum.html">Forum</a></li>
             <li class="nav-item"><a href="profile.html">My Profile</a></li>
             <li class="nav-item"><a href="goals.html">My Goals</a></li>
             <li class="nav-item"><a href="analytics.html">Analytics</a></li>
         </ul>
-    </div>
+    </nav>
 
+    <!-- Main Content -->
     <div class="main-content">
-        <h1>Coming Soon</h1>
-        <p>This section is under development.</p>
-    </div>
+        <!-- Completed Goals Section -->
+        <div class="analytics-section">
+            <h2 class="section-title">Completed Goals</h2>
+            <div class="goals-list">
+                <div class="goal-item">
+                    <h3>Goal 1</h3>
+                    <p>Completed on: April 15, 2024</p>
+                </div>
+                <div class="goal-item">
+                    <h3>Goal 2</h3>
+                    <p>Completed on: March 28, 2024</p>
+                </div>
+            </div>
+        </div>
 
-    <script src="app.js"></script>
+        <!-- Progressing Goals Section -->
+        <div class="analytics-section">
+            <h2 class="section-title">Progressing Goals</h2>
+            <div class="goals-list">
+                <div class="goal-item">
+                    <h3>Current Goal 1</h3>
+                    <p>Progress: 65%</p>
+                </div>
+                <div class="goal-item">
+                    <h3>Current Goal 2</h3>
+                    <p>Progress: 45%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project Distribution Section -->
+        <div class="analytics-section">
+            <h2 class="section-title">% of Your Projects</h2>
+            <div class="pie-chart"></div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #4CAF50"></div>
+                    <span>Completed (30%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2196F3"></div>
+                    <span>Progressing (40%)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff9800"></div>
+                    <span>Underprogressed (30%)</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
