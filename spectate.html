@@ -3,97 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Forum - Owltrack</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --sidebar-width: 250px;
-            --collapsed-width: 80px;
-            --primary-color: #4a90e2;
-            --success-color: #4CAF50;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-        }
-
-        /* Matching sidebar styling from index.html */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            position: fixed;
-            background: #2c3e50;
-            transition: width 0.3s ease;
-            overflow: hidden;
-        }
-
-        .sidebar-header {
-            padding: 25px 20px;
-            text-align: center;
-        }
-
-        .logo-image {
-            width: 65px;
-            height: 65px;
-            margin: 0 auto 20px;
-            display: block;
-            border-radius: 50%;
-        }
-
-        .brand-name {
-            font-size: 2rem;
-            margin: 15px 0;
-            color: white;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-items {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            transition: background 0.3s ease;
-        }
-
-        .nav-item a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            display: block;
-        }
-
-        .nav-item:hover {
-            background-color: #34495e;
-        }
-
-        .sidebar-footer {
-            margin-top: auto;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .toggle-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1.5rem;
-        }
-
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 40px;
-            transition: margin-left 0.3s ease;
-            min-height: 100vh;
-        }
-
-        /* Forum-specific styles */
+        /* Page-specific enhancements */
         .forum-title {
             font-size: 24px;
             color: #2A3F54;
@@ -156,111 +68,87 @@
     </style>
 </head>
 <body>
-    <!-- Updated sidebar matching index.html -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <img src="logo.jpg" alt="Owltrack Logo" class="logo-image">
-                <h2 class="brand-name">OWLTRACK</h2>
-            </a>
-        </div>
+    <!-- Unified Sidebar -->
+    <nav class="sidebar">
+        <h2>Conv</h2>
+        <ul class="nav-items">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="spectate.html">Forum</a></li>
+            <li class="nav-item"><a href="profile.html">My Profile</a></li>
+            <li class="nav-item"><a href="goals.html">My Goals</a></li>
+            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
+        </ul>
+    </nav>
 
-        <nav class="nav-items">
-            <ul>
-                <li class="nav-item"><a href="index.html">Home</a></li>
-                <li class="nav-item"><a href="spectate.html">Forum</a></li>
-                <li class="nav-item"><a href="profile.html">My Profile</a></li>
-                <li class="nav-item"><a href="goals.html">My Goals</a></li>
-                <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-            </ul>
-        </nav>
-
-        <div class="sidebar-footer">
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        </div>
-    </div>
-
-    <!-- Main content with forum cards -->
+    <!-- Main Content -->
     <div class="main-content">
-        <div class="forum-container">
-            <h1 class="forum-title">Forum</h1>
-            
-            <!-- Alex's Card -->
-            <div class="forum-card">
-                <div class="user-header">
-                    <div class="user-info">
-                        <strong>Alex</strong><br>
-                        $60.00<br>
-                        Day 2
-                    </div>
-                    <button class="join-button">Join</button>
+        <h1 class="forum-title">Forum</h1>
+        
+        <!-- Alex's Card -->
+        <div class="forum-card">
+            <div class="user-header">
+                <div class="user-info">
+                    <strong>Alex</strong><br>
+                    $60.00<br>
+                    Day 2
                 </div>
-                <div class="task-info">
-                    <p><strong>Task:</strong> Ap Macro Unit 1<br>
-                    <strong>Due:</strong> April 11th</p>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 65%"></div>
-                    </div>
-                    <span>65%</span>
-                </div>
+                <button class="join-button">Join</button>
             </div>
-
-            <!-- May's Card -->
-            <div class="forum-card">
-                <div class="user-header">
-                    <div class="user-info">
-                        <strong>May</strong><br>
-                        $15.00<br>
-                        Day 4
-                    </div>
-                    <button class="join-button">Join</button>
-                </div>
-                <div class="task-info">
-                    <p><strong>Task:</strong> Go to gym every day<br>
-                    <strong>Due:</strong> April 19th</p>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 15%"></div>
-                    </div>
-                    <span>15%</span>
-                </div>
+            <div class="task-info">
+                <p><strong>Task:</strong> Ap Macro Unit 1<br>
+                <strong>Due:</strong> April 11th</p>
             </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <span>65%</span>
+            </div>
+        </div>
 
-            <!-- Sylvia's Card -->
-            <div class="forum-card">
-                <div class="user-header">
-                    <div class="user-info">
-                        <strong>Sylvia</strong><br>
-                        $55.00<br>
-                        Day 6
-                    </div>
-                    <button class="join-button">Join</button>
+        <!-- May's Card -->
+        <div class="forum-card">
+            <div class="user-header">
+                <div class="user-info">
+                    <strong>May</strong><br>
+                    $15.00<br>
+                    Day 4
                 </div>
-                <div class="task-info">
-                    <p><strong>Task:</strong> Earn $1,200<br>
-                    <strong>Due:</strong> May 8th</p>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="task-info">
+                <p><strong>Task:</strong> Go to gym every day<br>
+                <strong>Due:</strong> April 19th</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 15%"></div>
                 </div>
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 35%"></div>
-                    </div>
-                    <span>35%</span>
+                <span>15%</span>
+            </div>
+        </div>
+
+        <!-- Sylvia's Card -->
+        <div class="forum-card">
+            <div class="user-header">
+                <div class="user-info">
+                    <strong>Sylvia</strong><br>
+                    $55.00<br>
+                    Day 6
                 </div>
+                <button class="join-button">Join</button>
+            </div>
+            <div class="task-info">
+                <p><strong>Task:</strong> Earn $1,200<br>
+                <strong>Due:</strong> May 8th</p>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 35%"></div>
+                </div>
+                <span>35%</span>
             </div>
         </div>
     </div>
-
-    <script>
-        // Sidebar toggle functionality
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
-            document.querySelector('.toggle-btn').textContent = 
-                sidebar.classList.contains('collapsed') ? '→' : '☰';
-        }
-    </script>
 </body>
 </html>
