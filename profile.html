@@ -2,33 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coming Soon</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>My Profile</title>
+    <style>
+        /* Add profile-specific styles */
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            margin-bottom: 30px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .intro-text {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .update-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .track-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f8f8;
+        }
+
+        .warning-item {
+            color: #ff4444;
+            margin-bottom: 10px;
+        }
+
+        .motivational-message {
+            background: #f0faff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-placeholder"></div>
-                <h2 class="brand-name">Conv</h2>
-            </a>
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
-        </div>
+    <!-- Dark blue sidebar -->
+    <nav class="sidebar">
         <ul class="nav-items">
             <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-            <li class="nav-item"><a href="profile.html">My Profile</a></li>
+            <li class="nav-item"><a href="forum.html">Forum</a></li>
+            <li class="nav-item"><a href="profile.html" class="active">My Profile</a></li>
             <li class="nav-item"><a href="goals.html">My Goals</a></li>
             <li class="nav-item"><a href="analytics.html">Analytics</a></li>
         </ul>
-    </div>
+    </nav>
 
+    <!-- Main content -->
     <div class="main-content">
-        <h1>Coming Soon</h1>
-        <p>This section is under development.</p>
-    </div>
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1 class="profile-name">YRHacksApp</h1>
+                <p class="intro-text">Add your intro...</p>
+            </div>
 
-    <script src="app.js"></script>
+            <div class="profile-section">
+                <h2 class="section-title">Forum</h2>
+                <p class="intro-text">Update your progress</p>
+                <button class="update-button">Update</button>
+            </div>
+
+            <div class="profile-section">
+                <h2 class="section-title">My Track</h2>
+                <div class="track-item">
+                    <h3>My Progress</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <span>65%</span>
+                    </div>
+                </div>
+                
+                <div class="track-item">
+                    <h3>Received Warnings</h3>
+                    <div class="warning-item"> Missing progress update</div>
+                    <div class="warning-item"> Deadline approaching</div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h2 class="section-title">My Profile</h2>
+                <div class="motivational-message">
+                    <p>A: Great Job</p>
+                    <p>B: Let's go!!!</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
