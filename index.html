@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goal Achiever - Crowd-Powered Goals</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #7ed321;
+            --danger-color: #ff4757;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f6fa;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .goal-list {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .goal-item {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+
+        .goal-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            height: 25px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            transition: width 0.5s ease;
+        }
+
+        .days-container {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .day {
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .day:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .balance {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .comment-section {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .comment {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .donate-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100px;
+        }
+
+        .create-goal {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="balance">
+        My Balance: $<span id="balance">300.00</span>
+    </div>
+
+    <div class="nav">
+        <h1 style="color: var(--primary-color);">Goal Achiever</h1>
+        <button onclick="showCreateModal()">+ Create New Goal</button>
+    </div>
+
+    <div class="modal" id="createModal">
+        <h2>Create New Goal</h2>
+        <input type="text" placeholder="Goal Title" id="goalTitle" class="form-input">
+        <textarea placeholder="Goal Description" id="goalDesc" class="form-input"></textarea>
+        <button onclick="createNewGoal()">Create Goal</button>
+        <button onclick="hideCreateModal()">Cancel</button>
+    </div>
+
+    <div class="goal-list">
+        <div class="goal-item">
+            <h3>Complete Web Development Project [E3.0.8] [Day3]</h3>
+            <div class="progress-bar">
+                <div class="progress" style="width: 30%"></div>
+            </div>
+            <div class="days-container">
+                <div class="day">D1.9</div>
+                <div class="day">D2.7</div>
+                <div class="day">D3.6</div>
+                <!-- Add more days -->
+            </div>
+            
+            <div class="donate-section">
+                <input type="number" placeholder="Amount" id="donateAmount" min="1" max="300">
+                <button onclick="makeDonation()">Donate</button>
+            </div>
+
+            <div class="comment-section">
+                <h4>Comments (3)</h4>
+                <div class="comment">
+                    <strong>John:</strong> Great progress! Keep it up!
+                </div>
+                <input type="text" placeholder="Add a comment..." id="commentInput">
+                <button onclick="postComment()">Post Comment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let balance = 300.00;
+        let currentProgress = 30;
+
+        function showCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+        }
+
+        function hideCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+        }
+
+        function createNewGoal() {
+            const title = document.getElementById('goalTitle').value;
+            const desc = document.getElementById('goalDesc').value;
+            // Add logic to create new goal
+            hideCreateModal();
+        }
+
+        function makeDonation() {
+            const amount = parseFloat(document.getElementById('donateAmount').value);
+            if (amount > balance) {
+                alert('Insufficient balance!');
+                return;
+            }
+            balance -= amount;
+            document.getElementById('balance').textContent = balance.toFixed(2);
+            alert(`Thank you for donating $${amount}!`);
+        }
+
+        function postComment() {
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+                const commentSection = document.querySelector('.comment-section');
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `<strong>You:</strong> ${commentText}`;
+                commentSection.insertBefore(newComment, commentSection.lastElementChild);
+                commentInput.value = '';
+            }
+        }
+
+        // Simulate progress update
+        setInterval(() => {
+            if (currentProgress < 100) {
+                currentProgress += Math.random() * 2;
+                document.querySelector('.progress').style.width = 
+                    Math.min(currentProgress, 100) + '%';
+            }
+        }, 3000);
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
