@@ -2,13 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Goal Achiever</title>
+    <title>Goal Achiever - Owltrack</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --sidebar-width: 250px;
             --collapsed-width: 80px;
             --primary-color: #4a90e2;
+        }
+
+        /* ENHANCED LOGO AND BRANDING */
+        .logo-image {
+            width: 65px !important;  /* Increased from 50px */
+            height: 65px !important;
+            margin: 0 auto 20px !important;
+        }
+
+        .brand-name {
+            font-size: 2rem !important;  /* Increased from 1.5rem */
+            margin: 15px 0 !important;
+            letter-spacing: 0.5px;
         }
 
         /* SIDEBAR IMPROVEMENTS */
@@ -25,6 +38,7 @@
 
         .nav-item {
             padding: 15px 25px;
+            transition: background 0.3s ease;
         }
 
         /* FLOATING BUTTON */
@@ -32,16 +46,19 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 60px;
-            height: 60px;
+            width: 70px;  /* Slightly larger */
+            height: 70px;
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            font-size: 1.5rem;
+            font-size: 2rem;  /* Larger "+" symbol */
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* MAIN CONTENT STYLING */
@@ -60,6 +77,8 @@
         .update-button {
             margin-top: 50px;
             align-self: flex-start;
+            padding: 15px 35px;
+            font-size: 1.1rem;
         }
 
         .progress-bar {
@@ -73,17 +92,23 @@
             right: 20px;
             background: var(--primary-color);
             color: white;
-            padding: 12px 25px;
+            padding: 15px 30px;
             border-radius: 25px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             z-index: 1000;
+            font-size: 1.1rem;
         }
 
         /* SIDEBAR FOOTER */
         .sidebar-footer {
             margin-top: auto;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            padding: 12px;
         }
     </style>
 </head>
@@ -92,8 +117,8 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="index.html" class="logo-link">
-                <img src="logo.jpg" alt="Conv Logo" class="logo-image">
-                <h2 class="brand-name">Conv</h2>
+                <img src="logo.jpg" alt="Owltrack Logo" class="logo-image">
+                <h2 class="brand-name">OWLTRACK</h2>
             </a>
         </div>
 
@@ -141,6 +166,9 @@
                 <button class="comment-btn" onclick="postComment()">Post</button>
                 <button class="comment-btn anonymous-btn" onclick="postComment(true)">Anonymous</button>
             </div>
+            <div class="comments-container" id="commentsContainer">
+                <!-- Comments will be dynamically inserted here -->
+            </div>
         </div>
 
         <!-- CREATE GOAL MODAL -->
@@ -160,6 +188,38 @@
     <!-- FLOATING BUTTON -->
     <button class="floating-new-goal-btn" onclick="showCreateModal()">+</button>
 
-    <script src="app.js"></script>
+    <script>
+        // Comment System Functionality
+        let comments = [
+            {text: "First comment example!", author: "System", date: new Date().toLocaleString()}
+        ];
+
+        function displayComments() {
+            const container = document.getElementById('commentsContainer');
+            container.innerHTML = comments.map(comment => `
+                <div class="comment">
+                    <strong>${comment.author}:</strong> 
+                    ${comment.text}
+                    <small>${comment.date}</small>
+                </div>
+            `).join('');
+        }
+
+        function postComment(isAnonymous = false) {
+            const input = document.getElementById('commentInput');
+            if (input.value.trim()) {
+                comments.push({
+                    text: input.value,
+                    author: isAnonymous ? 'Anonymous' : 'You',
+                    date: new Date().toLocaleString()
+                });
+                input.value = '';
+                displayComments();
+            }
+        }
+
+        // Initialize comments
+        displayComments();
+    </script>
 </body>
 </html>
