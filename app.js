@@ -23,15 +23,18 @@ function renderGoals() {
         goalCard.innerHTML = `
             <h3>${goal.name}</h3>
             <div class="project-meta">
-                <div>Start: ${new Date(goal.startDate).toLocaleDateString()}</div>
-                <div>Days: ${daysElapsed}</div>
-                <div>End: ${new Date(goal.endDate).toLocaleDateString()}</div>
-                <div>Updates: ${goal.updates.length}/${goal.totalDays}</div>
+                <div>Starting date: ${new Date(goal.startDate).toLocaleDateString()}</div>
+                <div>Time elapsed: ${daysElapsed} days</div>
+                <div>End date: ${new Date(goal.endDate).toLocaleDateString()}</div>
+                <div>Revenue: $${(goal.updates.length * 5).toFixed(2)}</div>
             </div>
             <div class="progress-bar">
                 <div class="progress" style="width: ${(daysElapsed / goal.totalDays) * 100}%"></div>
             </div>
-            <button class="update-button" onclick="updateProgress('${goal.id}')">UPDATE PROGRESS</button>
+            <button class="update-button" onclick="updateProgress('${goal.id}')">
+                UPDATE PROGRESS
+                ${state.pendingUpdates > 0 ? `<span class="pending-badge">${state.pendingUpdates}</span>` : ''}
+            </button>
         `;
         container.appendChild(goalCard);
     });
@@ -39,6 +42,8 @@ function renderGoals() {
 
 function updateUI() {
     document.getElementById('balance').textContent = state.balance.toFixed(2);
+    document.getElementById('pendingBadge').textContent = state.pendingUpdates || '';
+    document.getElementById('revenue').textContent = state.balance.toFixed(2);
 
     const pinnedGoal = state.goals.find(g => g.pinned);
     if (pinnedGoal) {
@@ -47,7 +52,6 @@ function updateUI() {
         document.getElementById('startDate').textContent = new Date(pinnedGoal.startDate).toLocaleDateString();
         document.getElementById('endDate').textContent = new Date(pinnedGoal.endDate).toLocaleDateString();
         document.getElementById('daysElapsed').textContent = daysElapsed;
-        document.getElementById('progressCount').textContent = `${pinnedGoal.updates.length}/${pinnedGoal.totalDays}`;
         document.querySelector('.progress').style.width = `${(daysElapsed / pinnedGoal.totalDays) * 100}%`;
     }
 }
@@ -101,9 +105,11 @@ function updateProgress(goalId) {
             const goal = state.goals.find(g => g.id === goalId);
             goal.updates.push(new Date().toISOString());
             state.pendingUpdates++;
+            state.balance += 5.00;
             
             localStorage.setItem('goals', JSON.stringify(state.goals));
             localStorage.setItem('pendingUpdates', state.pendingUpdates);
+            localStorage.setItem('balance', state.balance);
 
             updateUI();
             renderGoals();
@@ -135,13 +141,16 @@ function showNotification(message, type = 'success') {
     notification.className = `notification-panel ${type}-notification`;
     notification.textContent = message;
     document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 5000);
+    setTimeout(() => notification.remove(), 3500);
 }
 
 function showWelcomeNotification() {
     if (!localStorage.getItem('firstVisit')) {
-        showNotification('Welcome to Goal Achiever!', 'success');
+        showNotification('There is 1 pending updates for you', 'danger');
         localStorage.setItem('firstVisit', 'true');
+        state.pendingUpdates = 1;
+        localStorage.setItem('pendingUpdates', state.pendingUpdates);
+        updateUI();
     }
 }
 
