@@ -322,50 +322,64 @@ h1, .header-title {
   border-bottom: none !important;
 }
 
-/* ======== FIXED LOGO STYLES ======== */
-.logo-image { /* Changed from .header-logo to match HTML class */
-  width: 50px;       /* Match original placeholder size */
-  height: 50px;      /* Match original placeholder size */
-  object-fit: contain;
-  border-radius: 50%; /* Match placeholder style */
-  margin: 0 auto 15px; /* Center logo */
+/* ======== QUICK FIXES FOR OVERSIZED ELEMENTS ======== */
+/* Base font size reduction */
+body {
+  font-size: 14px !important;
 }
 
-.logo-link {
-  display: flex;
-  flex-direction: column; /* Stack logo and text vertically */
-  align-items: center;
-  text-decoration: none;
-  margin-bottom: 25px;
-}
-
+/* Header sizing fixes */
 .brand-name {
-  font-size: 1.5rem;
-  color: white;
-  margin: 15px 0 0 0; /* Add spacing between logo and text */
+  font-size: 1.2rem !important;
+  margin: 10px 0 !important;
 }
 
-/* Remove old logo placeholder styles */
-.logo-placeholder {
-  display: none !important;
+/* Navigation menu fixes */
+.nav-items {
+  font-size: 0.9rem !important;
+  padding-left: 15px !important;
 }
 
-/* ======== SIDEBAR HEADER FIX ======== */
-.sidebar-header {
-  padding: 25px 20px;
-  text-align: center;
-  position: relative;
-  min-height: auto; /* Remove fixed height */
+.nav-item {
+  padding: 8px 15px !important;
 }
 
-/* ======== BUTTON POSITIONING FIX ======== */
-.new-goal-btn {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+/* Goal section sizing */
+.example-goal {
+  padding: 20px !important;
+  min-height: auto !important;
 }
 
-.toggle-btn {
+.example-goal h2 {
+  font-size: 1.3rem !important;
+  margin-bottom: 10px !important;
+}
+
+/* Progress section fixes */
+.update-button {
+  margin-top: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 0.9rem !important;
+}
+
+.progress-bar {
+  margin: 10px 0 20px 0 !important;
+  height: 20px !important;
+}
+
+/* Comments section fixes */
+.comment-section h4 {
+  font-size: 1rem !important;
+}
+
+.comment-input-group input {
+  padding: 8px !important;
+  font-size: 0.9rem !important;
+}
+
+.comment-btn {
+  padding: 8px 15px !important;
+  font-size: 0.85rem !important;
+}
   display: none; /* Remove if not needed */
 }
