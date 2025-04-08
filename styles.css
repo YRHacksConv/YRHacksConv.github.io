@@ -206,3 +206,27 @@ body {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+/* Add this to styles.css */
+.logo-image {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 10px auto !important;
+}
+
+.brand-name {
+    font-size: 1.2rem !important;
+    margin: 10px 0 !important;
+}
+
+.sidebar {
+    padding: 20px !important;
+}
+
+.nav-item {
+    padding: 10px 15px !important;
+}
+
+.main-content {
+    padding: 20px !important;
+}
