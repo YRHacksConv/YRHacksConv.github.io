@@ -4,76 +4,35 @@
     <meta charset="UTF-8">
     <title>My Goals</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Page-specific styles */
-        .goal-header {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #2A3F54;
-            font-weight: 600;
-        }
-
-        .goal-details {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .progress-percent {
-            color: var(--primary-color);
-            font-weight: 500;
-            min-width: 45px;
-        }
-
-        /* Floating Action Button */
-        .fab {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .fab:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-        }
-    </style>
 </head>
 <body>
-    <!-- Unified Sidebar -->
-    <nav class="sidebar">
-        <h2>OWLTRACKER</h2>
-        <ul class="nav-items">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-            <li class="nav-item"><a href="profile.html">My Profile</a></li>
-            <li class="nav-item"><a href="goals.html">My Goals</a></li>
-            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-        </ul>
-    </nav>
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo-link">
+                <img src="logo.jpg" alt="Logo" class="logo-image">
+                <h2 class="brand-name">OWLTRACK</h2>
+            </a>
+        </div>
 
-    <!-- Main Content -->
+        <nav class="nav-items">
+            <ul>
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="spectate.html">Forum</a></li>
+                <li class="nav-item"><a href="profile.html">My Profile</a></li>
+                <li class="nav-item"><a href="goals.html">My Goals</a></li>
+                <li class="nav-item"><a href="analytics.html">Analytics</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
     <div class="main-content">
-        <h1 class="section-title">My Goals</h1>
+        <h1>My Goals</h1>
 
         <!-- Goal 1 -->
         <div class="section">
@@ -88,9 +47,8 @@
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 65%"></div>
                 </div>
-                <span class="progress-percent">65%</span>
+                <button class="update-button">UPDATE PROGRESS</button>
             </div>
-            <button class="update-button">UPDATE PROGRESS</button>
         </div>
 
         <!-- Goal 2 -->
@@ -106,31 +64,22 @@
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 30%"></div>
                 </div>
-                <span class="progress-percent">30%</span>
+                <button class="update-button">UPDATE PROGRESS</button>
             </div>
-            <button class="update-button">UPDATE PROGRESS</button>
-        </div>
-
-        <!-- Goal 3 -->
-        <div class="section">
-            <div class="goal-header">E-commerce Launch</div>
-            <div class="goal-details">
-                <div><strong>Start:</strong> 2024-05-01</div>
-                <div><strong>End:</strong> 2024-08-31</div>
-                <div><strong>Days:</strong> 122</div>
-                <div><strong>Revenue:</strong> $1000.00</div>
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 85%"></div>
-                </div>
-                <span class="progress-percent">85%</span>
-            </div>
-            <button class="update-button">UPDATE PROGRESS</button>
         </div>
     </div>
 
-    <!-- Add Goal Floating Button -->
+    <!-- FLOATING BUTTON -->
     <button class="fab">+</button>
+
+    <script>
+        // SIDEBAR TOGGLE
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+            document.querySelector('.toggle-btn').textContent = 
+                sidebar.classList.contains('collapsed') ? '→' : '☰';
+        }
+    </script>
 </body>
 </html>
