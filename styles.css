@@ -307,3 +307,12 @@ body {
     margin-left: 10px;  
     font-size: 0.9em;  
 }  
+
+#Conv { /* If it's using an ID */
+  color: white !important;
+}
+
+/* OR if it's a class or HTML element */
+h1, .header-title { 
+  color: white !important;
+}
