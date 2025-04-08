@@ -5,7 +5,6 @@ let state = {
     pendingUpdates: JSON.parse(localStorage.getItem('pendingUpdates')) || 0  
 };  
 
-// ======================= CAMERA STREAM REFERENCE =======================  
 let cameraStream = null;  
 
 // ======================= CORE FUNCTIONS =======================  
@@ -18,9 +17,7 @@ function init() {
 }  
 
 function initializeSidebar() {
-    // Sidebar toggle functionality
     document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
-    // Close sidebar when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn')) {
             document.getElementById('sidebar').classList.remove('collapsed');
@@ -87,12 +84,10 @@ function calculateRevenue(updates) {
 // ======================= GOAL CREATION SYSTEM =======================  
 function showCreateModal() {  
     document.getElementById('createModal').style.display = 'block';  
-    document.querySelector('.modal-backdrop').style.display = 'block';  
 }  
 
 function hideCreateModal() {  
     document.getElementById('createModal').style.display = 'none';  
-    document.querySelector('.modal-backdrop').style.display = 'none';  
     clearForm();  
 }  
 
@@ -116,6 +111,12 @@ function createGoal() {
         updates: [],  
         pinned: state.goals.length === 0  
     };  
+
+    // Check for duplicate name
+    if (state.goals.some(goal => goal.name.toLowerCase() === newGoal.name.toLowerCase())) {
+        showNotification('Goal with this name already exists!', 'danger');
+        return;
+    }
 
     state.goals.push(newGoal);  
     saveState();  
@@ -190,11 +191,9 @@ function updateProgress(goalId) {
 
 // ======================= UI SYSTEM =======================  
 function updateUI() {  
-    // Balance updates  
     document.getElementById('balance').textContent = state.balance.toFixed(2);  
     document.getElementById('revenue').textContent = state.balance.toFixed(2);  
 
-    // Pinned goal updates  
     const pinnedGoal = state.goals.find(g => g.pinned);  
     if (pinnedGoal) {  
         const daysElapsed = calculateDaysElapsed(pinnedGoal.startDate);  
