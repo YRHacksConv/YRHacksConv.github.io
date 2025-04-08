@@ -326,3 +326,33 @@ body {
     margin-left: 10px;
     font-size: 0.9em;
 }
+
+/* ====== NEW: ACTIVE NAV ITEM ====== */
+.nav-item.active {
+    background: #34495e;
+    border-radius: 8px;
+}
+
+/* ====== EXAMPLE GOAL STYLES ====== */
+.example-goal {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+
+/* ====== COMMENT BUTTON ENHANCEMENTS ====== */
+.comment-btn {
+    background: linear-gradient(135deg, var(--primary-color), #0066cc);
+    border-radius: 25px;
+    padding: 12px 25px;
+    border: none;
+    color: white !important;
+    transition: transform 0.2s;
+}
+
+.anonymous-btn {
+    background: #333 !important;
+    border: 2px solid var(--primary-color) !important;
+}
