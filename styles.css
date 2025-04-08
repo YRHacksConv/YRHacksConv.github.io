@@ -1,247 +1,201 @@
-/* styles.css - FULL CODE */
+/* styles.css - FULL COMPLETE VERSION */
 :root {  
     --primary-color: #4a90e2;  
     --success-color: #7ed321;  
     --danger-color: #ff4757;  
-    --bg-color: #2A3F54; /* Changed to match spectate */  
-    --sidebar-width: 280px; /* Updated width */  
+    --sidebar-bg: #2A3F54;  
+    --text-light: #E4E7EA;  
+    --sidebar-width: 280px;  
     --collapsed-width: 80px;  
     --text-color: #333;  
 }  
 
 body {  
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    font-family: 'Segoe UI', system-ui, sans-serif;  
     margin: 0;  
-    background: #f5f6fa;  
+    background: #f8f9fa;  
     color: var(--text-color);  
+    display: flex;  
+    min-height: 100vh;  
+    font-size: 14px;  
     transition: margin-left 0.3s;  
-    font-size: 14px !important;  
-    display: flex; /* Added for spectate match */  
-    min-height: 100vh; /* Added for spectate match */  
 }  
 
-/* ======== SIDEBAR SYSTEM ======== */  
+/* ======== SIDEBAR SYSTEM ======== */
 .sidebar {  
     width: var(--sidebar-width);  
     height: 100vh;  
     position: fixed;  
-    top: 0;  
-    left: 0;  
-    background: var(--bg-color);  
+    background: var(--sidebar-bg);  
     color: white;  
-    transition: 0.3s;  
+    padding: 40px 30px;  
+    transition: width 0.3s;  
     overflow-x: hidden;  
     z-index: 1000;  
-    display: flex;  
-    flex-direction: column;  
-    padding: 40px 30px !important; /* Spectate addition */  
 }  
 
-.sidebar-header {  
-    padding: 25px 20px;  
-    text-align: center;  
-    min-height: 180px;  
-    position: relative;  
-    display: none; /* Spectate fix */  
-}  
-
-.logo-placeholder {  
-    width: 50px;  
-    height: 50px;  
-    background: #fff;  
-    border-radius: 50%;  
-    margin: 0 auto 15px;  
-    display: none !important; /* Spectate fix */  
-}  
-
-.brand-name {  
-    margin: 0 0 25px 0;  
-    font-size: 1.5rem;  
-    transition: opacity 0.3s;  
-    display: none !important; /* Spectate fix */  
-}  
-
-/* NEW SPECTATE HEADER */  
-.sidebar > h2 {  
-    color: white !important;  
-    font-size: 2rem !important;  
-    margin: 0 0 40px 0 !important;  
-    display: block !important;  
+.sidebar h2 {  
+    font-size: 2rem;  
+    margin-bottom: 40px;  
 }  
 
 .nav-items {  
     list-style: none;  
     padding: 0;  
-    margin: 40px 0 !important; /* Spectate fix */  
-    flex-grow: 1;  
+    margin: 40px 0;  
 }  
 
 .nav-item {  
-    padding: 0 !important; /* Original: 15px 25px */  
-    cursor: pointer;  
-    transition: 0.2s;  
-    margin: 25px 0 !important; /* Spectate addition */  
+    margin: 25px 0;  
+    padding: 0;  
 }  
 
 .nav-item a {  
-    color: #E4E7EA !important; /* Spectate color */  
+    color: var(--text-light);  
     text-decoration: none;  
+    font-size: 16px;  
+    font-weight: 500;  
+    transition: opacity 0.3s;  
     display: block;  
-    width: 100%;  
-    font-size: 16px !important; /* Spectate fix */  
-    font-weight: 500 !important; /* Spectate fix */  
 }  
 
-.nav-item:hover {  
-    background-color: #34495e;  
+.nav-item a:hover {  
+    opacity: 0.9;  
 }  
 
-/* Collapsed State - KEPT ORIGINAL */  
+/* Collapse Functionality */
 .sidebar.collapsed {  
     width: var(--collapsed-width);  
 }  
 
-.sidebar.collapsed .brand-name,  
-.sidebar.collapsed .nav-items {  
+.sidebar.collapsed h2,  
+.sidebar.collapsed .nav-item span {  
     display: none;  
 }  
 
-.sidebar.collapsed .logo-placeholder {  
-    margin: 15px auto;  
-}  
-
-.sidebar.collapsed .new-goal-btn {  
-    margin: 10px auto;  
-}  
-
-/* ======== MAIN CONTENT ======== */  
+/* ======== MAIN CONTENT ======== */
 .main-content {  
     margin-left: var(--sidebar-width);  
-    padding: 50px !important; /* Original: 30px */  
-    transition: margin-left 0.3s;  
+    padding: 50px;  
+    flex: 1;  
     min-height: 100vh;  
-    flex: 1; /* Spectate addition */  
+    transition: margin-left 0.3s;  
 }  
 
 .sidebar.collapsed ~ .main-content {  
     margin-left: var(--collapsed-width);  
 }  
 
-/* ======== REST OF YOUR ORIGINAL CODE ======== */  
-/* GOAL SYSTEM */  
-.progress-header {  
+/* ======== GOALS PAGE STYLES ======== */
+.section {  
     background: white;  
-    padding: 25px;  
-    border-radius: 15px;  
-    margin-bottom: 40px;  
+    padding: 30px;  
+    margin-bottom: 30px;  
+    border-radius: 12px;  
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);  
 }  
 
-.project-title {  
-    font-size: 1.6rem;  
-    margin-bottom: 10px;  
-    color: var(--primary-color);  
+.goal-header {  
+    font-size: 1.4rem;  
+    margin-bottom: 1rem;  
+    color: var(--sidebar-bg);  
+    font-weight: 600;  
 }  
 
-.project-meta {  
+.goal-details {  
     display: grid;  
     grid-template-columns: repeat(2, 1fr);  
     gap: 15px;  
-    margin-bottom: 20px;  
     color: #666;  
-    font-size: 0.95rem;  
+    margin-bottom: 20px;  
+}  
+
+.progress-container {  
+    display: flex;  
+    align-items: center;  
+    gap: 15px;  
+    margin: 20px 0;  
 }  
 
 .progress-bar {  
-    height: 25px;  
-    background: #f0f0f0;  
-    border-radius: 15px;  
+    flex-grow: 1;  
+    height: 8px;  
+    background: #eee;  
+    border-radius: 4px;  
     overflow: hidden;  
 }  
 
-.progress {  
+.progress-fill {  
     height: 100%;  
-    background: linear-gradient(90deg, var(--primary-color), var(--success-color));  
-    transition: width 0.5s ease;  
+    background: var(--primary-color);  
+    transition: width 0.3s ease;  
 }  
 
-/* BUTTONS */  
-.update-section {  
-    margin: 40px 0 20px 0;  
-}  
-
+/* ======== BUTTONS ======== */
 .update-button {  
-    padding: 15px 35px;  
     background: var(--success-color);  
-    border: none;  
-    border-radius: 25px;  
     color: white;  
-    font-weight: bold;  
-    cursor: pointer;  
-    transition: transform 0.2s;  
-    display: flex;  
-    align-items: center;  
-}  
-
-.comment-btn {  
-    background: linear-gradient(135deg, var(--primary-color), #0066cc);  
-    border-radius: 25px;  
-    padding: 12px 25px;  
     border: none;  
-    color: white !important;  
-    transition: transform 0.2s;  
+    padding: 12px 35px;  
+    border-radius: 25px;  
+    cursor: pointer;  
+    font-weight: 500;  
 }  
 
-.anonymous-btn {  
-    background: #333 !important;  
-    border: 2px solid var(--primary-color) !important;  
-}  
-
-/* NOTIFICATION SYSTEM */
-.notification-panel {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 15px 25px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 500;
-    z-index: 9999;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;
-}
-
-.success-notification {
-    background: #4CAF50;
-}
-
-.danger-notification {
-    background: #f44336;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-/* MISC COMPONENTS */  
-.balance {  
+.fab {  
     position: fixed;  
-    top: 20px;  
-    right: 20px;  
+    bottom: 30px;  
+    right: 30px;  
+    width: 60px;  
+    height: 60px;  
+    border-radius: 50%;  
     background: var(--primary-color);  
     color: white;  
-    padding: 12px 25px;  
-    border-radius: 25px;  
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);  
+    border: none;  
+    font-size: 24px;  
+    cursor: pointer;  
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);  
+    transition: transform 0.2s;  
     z-index: 1000;  
 }  
 
+.fab:hover {  
+    transform: scale(1.05);  
+}  
+
+/* ======== NOTIFICATION SYSTEM ======== */
+.notification-panel {  
+    position: fixed;  
+    bottom: 30px;  
+    right: 30px;  
+    padding: 15px 25px;  
+    border-radius: 10px;  
+    color: white;  
+    font-weight: 500;  
+    z-index: 9999;  
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);  
+    animation: slideIn 0.3s ease, fadeOut 0.5s ease 2.5s forwards;  
+}  
+
+.success-notification {  
+    background: #4CAF50;  
+}  
+
+.danger-notification {  
+    background: #f44336;  
+}  
+
+@keyframes slideIn {  
+    from { transform: translateX(100%); }  
+    to { transform: translateX(0); }  
+}  
+
+@keyframes fadeOut {  
+    from { opacity: 1; }  
+    to { opacity: 0; }  
+}  
+
+/* ======== MODAL SYSTEM ======== */
 .modal {  
     display: none;  
     position: fixed;  
@@ -255,14 +209,6 @@ body {
     z-index: 1001;  
     max-width: 500px;  
     width: 90%;  
-}  
-
-.example-goal {  
-    background: white;  
-    padding: 25px;  
-    border-radius: 15px;  
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);  
-    margin-bottom: 25px;  
 }  
 
 .form-input {  
@@ -280,12 +226,51 @@ body {
     margin-top: 20px;  
 }  
 
-.modal-actions button {  
-    flex: 1;  
-    padding: 10px;  
+/* ======== LEGACY COMPATIBILITY ======== */
+.logo-placeholder,  
+.toggle-btn,  
+.new-goal-btn {  
+    display: none !important;  
+}  
+
+.brand-name {  
+    display: none !important;  
+}  
+
+.progress-header {  
+    background: white;  
+    padding: 25px;  
+    border-radius: 15px;  
+    margin-bottom: 40px;  
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);  
+}  
+
+.example-goal {  
+    background: white;  
+    padding: 25px;  
+    border-radius: 15px;  
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);  
+    margin-bottom: 25px;  
+}  
+
+.comment-btn {  
+    background: linear-gradient(135deg, var(--primary-color), #0066cc);  
+    border-radius: 25px;  
+    padding: 12px 25px;  
     border: none;  
-    border-radius: 5px;  
-    cursor: pointer;  
+    color: white;  
+}  
+
+.balance {  
+    position: fixed;  
+    top: 20px;  
+    right: 20px;  
+    background: var(--primary-color);  
+    color: white;  
+    padding: 12px 25px;  
+    border-radius: 25px;  
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);  
+    z-index: 1000;  
 }  
 
 .pending-badge {  
@@ -296,125 +281,3 @@ body {
     margin-left: 10px;  
     font-size: 0.9em;  
 }  
-
-#Conv {  
-  color: white !important;  
-  text-decoration: none !important;  
-  border-bottom: none !important;  
-}  
-
-.logo-image {  
-  width: 50px;  
-  height: 50px;  
-  object-fit: contain;  
-  border-radius: 50%;  
-  margin: 0 auto 15px;  
-}  
-
-.logo-link {  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-  text-decoration: none;  
-  margin-bottom: 25px;  
-}  
-
-.new-goal-btn {  
-  position: absolute;  
-  bottom: 20px;  
-  left: 50%;  
-  transform: translateX(-50%);  
-  display: none !important; /* Spectate fix */  
-}  
-
-.toggle-btn {  
-  display: none !important; /* Spectate fix */  
-}
-
-/* QUICK FIXES */
-.brand-name {
-  font-size: 1.2rem !important;
-  margin: 10px 0 !important;
-}
-
-.nav-items {
-  font-size: 0.9rem !important;
-  padding-left: 15px !important;
-}
-
-.nav-item {
-  padding: 8px 15px !important;
-}
-
-.example-goal {
-  padding: 20px !important;
-  min-height: auto !important;
-}
-
-.example-goal h2 {
-  font-size: 1.3rem !important;
-  margin-bottom: 10px !important;
-}
-
-.update-button {
-  margin-top: 20px !important;
-  padding: 10px 20px !important;
-  font-size: 0.9rem !important;
-}
-
-.progress-bar {
-  margin: 10px 0 20px 0 !important;
-  height: 20px !important;
-}
-
-.comment-section h4 {
-  font-size: 1rem !important;
-}
-
-.comment-input-group input {
-  padding: 8px !important;
-  font-size: 0.9rem !important;
-}
-
-.comment-btn {
-  padding: 8px 15px !important;
-  font-size: 0.85rem !important;
-}
-
-/* Add these to your existing styles.css */
-/* Floating Action Button */
-.fab {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform 0.2s, box-shadow 0.2s;
-    z-index: 1000;
-}
-
-.fab:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-}
-
-/* Progress Bar Updates */
-.progress-bar {
-    height: 8px;
-    background: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-}
