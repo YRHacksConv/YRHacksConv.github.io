@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <title>My Goals</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional spacing for goals list */
+        #goalsContainer {
+            margin-top: 30px;
+            display: grid;
+            gap: 25px;
+        }
+        
+        .goal-card {
+            padding: 25px;
+            position: relative;
+        }
+        
+        .goal-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <a href="index.html" class="logo-link">
@@ -15,29 +34,40 @@
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
             <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
-        <ul class="nav-items">
-            <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-            <li class="nav-item"><a href="profile.html">My Profile</a></li>
-            <li class="nav-item"><a href="goals.html">My Goals</a></li>
-            <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-        </ul>
+
+        <nav class="nav-items">
+            <ul>
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="spectate.html">Spectate</a></li>
+                <li class="nav-item"><a href="profile.html">My Profile</a></li>
+                <li class="nav-item active"><a href="goals.html">My Goals</a></li>
+                <li class="nav-item"><a href="earnings.html">My Earnings</a></li>
+                <li class="nav-item"><a href="analytics.html">Analytics</a></li>
+                <li class="nav-item"><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-content" id="mainContent">
-        <h1>My Goals</h1>
+        <div class="goals-header">
+            <h1>My Goals</h1>
+            <button class="new-goal-btn mobile" onclick="showCreateModal()">+ New Goal</button>
+        </div>
+        
         <div id="goalsContainer"></div>
-    </div>
 
-    <div class="modal" id="createModal">
-        <h2>Create New Goal</h2>
-        <input type="text" id="goalName" placeholder="Goal Name" class="form-input">
-        <input type="date" id="startDate" class="form-input">
-        <input type="date" id="endDate" class="form-input">
-        <textarea id="goalDescription" class="form-input" placeholder="Description"></textarea>
-        <div class="modal-actions">
-            <button onclick="createGoal()">Create</button>
-            <button onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
+        <!-- CREATE GOAL MODAL -->
+        <div class="modal" id="createModal">
+            <h2>Create New Goal</h2>
+            <input type="text" id="goalName" placeholder="Goal Name" class="form-input" required>
+            <input type="date" id="startDate" class="form-input" required>
+            <input type="date" id="endDate" class="form-input" required>
+            <textarea id="goalDescription" class="form-input" placeholder="Description (optional)"></textarea>
+            <div class="modal-actions">
+                <button onclick="createGoal()">Create Goal</button>
+                <button class="cancel-btn" onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
+            </div>
         </div>
     </div>
 
