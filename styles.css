@@ -322,9 +322,22 @@ h1, .header-title {
   border-bottom: none !important;
 }
 
-.logo-image {
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Keep square for best results */
-    object-fit: contain; /* Prevents image distortion */
-    margin-right: 10px; /* Space between logo and text */
+.header-logo {
+  width: 24px;       /* Exact width to match original */
+  height: 24px;      /* Exact height to match original */
+  object-fit: contain; /* Prevents distortion */
+  display: block;    /* Ensures proper alignment */
+  margin-right: 8px; /* Space between logo and text */
+}
+
+.logo-link {
+  display: flex;
+  align-items: center; /* Vertically centers logo and text */
+  text-decoration: none;
+}
+
+.brand-name {
+  font-size: 1.2rem; /* Match original text size */
+  margin: 0;         /* Remove default margins */
+  color: white;      /* Match original color */
 }
