@@ -316,3 +316,8 @@ body {
 h1, .header-title { 
   color: white !important;
 }
+
+#Conv {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
