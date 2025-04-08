@@ -11,6 +11,7 @@ function init() {
 }
 
 function renderGoals() {
+    // If this page doesn't have a goalsContainer (like the index page), do nothing
     if (!document.getElementById('goalsContainer')) return;
 
     const container = document.getElementById('goalsContainer');
@@ -29,7 +30,7 @@ function renderGoals() {
                 <div>Updates: ${goal.updates.length}/${goal.totalDays}</div>
             </div>
             <div class="progress-bar">
-                <div class="progress" style="width: ${(daysElapsed/goal.totalDays)*100}%"></div>
+                <div class="progress" style="width: ${(daysElapsed / goal.totalDays) * 100}%"></div>
             </div>
             <button class="update-button" onclick="updateProgress('${goal.id}')">UPDATE PROGRESS</button>
         `;
@@ -38,9 +39,11 @@ function renderGoals() {
 }
 
 function updateUI() {
+    // Update balance display
     document.getElementById('balance').textContent = state.balance.toFixed(2);
+
+    // Check if there's a pinned goal to display in the top section
     const pinnedGoal = state.goals.find(g => g.pinned);
-    
     if (pinnedGoal) {
         const daysElapsed = Math.floor((new Date() - new Date(pinnedGoal.startDate)) / (1000 * 60 * 60 * 24));
         document.getElementById('pinnedGoalName').textContent = pinnedGoal.name;
@@ -48,12 +51,16 @@ function updateUI() {
         document.getElementById('endDate').textContent = new Date(pinnedGoal.endDate).toLocaleDateString();
         document.getElementById('daysElapsed').textContent = daysElapsed;
         document.getElementById('progressCount').textContent = `${pinnedGoal.updates.length}/${pinnedGoal.totalDays}`;
-        document.querySelector('.progress').style.width = `${(daysElapsed/pinnedGoal.totalDays)*100}%`;
+        document.querySelector('.progress').style.width = `${(daysElapsed / pinnedGoal.totalDays) * 100}%`;
     }
 }
 
 function showCreateModal() {
     document.getElementById('createModal').style.display = 'block';
+}
+
+function hideCreateModal() {
+    document.getElementById('createModal').style.display = 'none';
 }
 
 function createGoal() {
@@ -62,8 +69,9 @@ function createGoal() {
     const endDate = document.getElementById('endDate').value;
     const description = document.getElementById('goalDescription').value;
 
-    const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);
-    
+    // Calculate total days from start to end
+    const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+
     const newGoal = {
         id: Date.now().toString(),
         name,
@@ -72,28 +80,51 @@ function createGoal() {
         description,
         totalDays,
         updates: [],
+        // If this is the first goal, pin it automatically
         pinned: state.goals.length === 0
     };
 
+    // Add to state and localStorage
     state.goals.push(newGoal);
     localStorage.setItem('goals', JSON.stringify(state.goals));
+
+    // Refresh the UI and close the modal
     updateUI();
     hideCreateModal();
+    renderGoals();
 }
 
 function updateProgress(goalId) {
+    // If no specific goalId is passed, try updating the pinned goal
+    if (!goalId) {
+        const pinnedGoal = state.goals.find(g => g.pinned);
+        if (!pinnedGoal) return;
+        goalId = pinnedGoal.id;
+    }
+
+    // Attempt to use camera for "verification" 
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
+            // Stop the camera stream immediately
             stream.getTracks().forEach(track => track.stop());
+
             const goal = state.goals.find(g => g.id === goalId);
+            // Add an update timestamp
             goal.updates.push(new Date().toISOString());
             state.pendingUpdates++;
+            
+            // Save new state
             localStorage.setItem('goals', JSON.stringify(state.goals));
             localStorage.setItem('pendingUpdates', state.pendingUpdates);
+
+            // Update UI
             updateUI();
+            renderGoals();
             showNotification('Progress update submitted for verification!', 'success');
         })
-        .catch(() => showNotification('Camera access required for verification', 'danger'));
+        .catch(() => {
+            showNotification('Camera access required for verification', 'danger');
+        });
 }
 
 function postComment(anonymous = false) {
@@ -121,16 +152,17 @@ function showNotification(message, type = 'success') {
 }
 
 function showWelcomeNotification() {
+    // Show a welcome notification on first visit
     if (!localStorage.getItem('firstVisit')) {
         showNotification('Welcome to Goal Achiever!', 'success');
         localStorage.setItem('firstVisit', 'true');
     }
 }
 
+/* Collapses/expands the sidebar */
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('collapsed');
-    document.getElementById('mainContent').classList.toggle('collapsed');
 }
 
-// Initialize when page loads
+// Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', init);
