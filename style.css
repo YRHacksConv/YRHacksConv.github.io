@@ -1,1 +1,220 @@
+:root {
+    --primary-color: #4a90e2;
+    --success-color: #7ed321;
+    --danger-color: #ff4757;
+    --bg-color: #2c3e50;
+    --sidebar-width: 250px;
+    --collapsed-width: 60px;
+    --text-color: #333;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: #f5f6fa;
+    color: var(--text-color);
+    transition: margin-left 0.3s;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--bg-color);
+    color: white;
+    transition: 0.3s;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: var(--collapsed-width);
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+}
+
+.logo-placeholder {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.nav-items {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.nav-item {
+    padding: 15px 25px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #34495e;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 30px;
+    transition: margin-left 0.3s;
+    min-height: 100vh;
+}
+
+.progress-header {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.project-title {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.project-meta {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.progress-bar {
+    height: 25px;
+    background: #f0f0f0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    transition: width 0.5s ease;
+}
+
+.update-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    gap: 20px;
+}
+
+.update-button {
+    padding: 15px 35px;
+    background: var(--success-color);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.balance {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.comment-section {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.comment-input-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.anonymous-btn {
+    background: #333 !important;
+    border: 1px solid #ddd !important;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    z-index: 1001;
+    max-width: 500px;
+    width: 90%;
+}
+
+.new-goal-btn {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    z-index: 1000;
+    border: none;
+    cursor: pointer;
+}
+
+.notification-panel {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    animation: slideIn 0.5s ease, fadeOut 1s ease 4s forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.pending-notification { background: var(--danger-color); }
+.success-notification { background: var(--success-color); }
+
+.goal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.pinned-goal {
+    border: 2px solid var(--primary-color);
+    background: #f8faff;
+}
