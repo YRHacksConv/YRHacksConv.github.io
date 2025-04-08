@@ -2,443 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Goal Achiever - Crowd-Powered Goals</title>
-    <style>
-        :root {
-            --primary-color: #4a90e2;
-            --success-color: #7ed321;
-            --danger-color: #ff4757;
-            --sidebar-width: 250px;
-            --collapsed-width: 60px;
-            --bg-color: #2c3e50;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: #f5f6fa;
-            transition: margin-left 0.3s;
-        }
-
-        /* Enhanced Sidebar Styles */
-        .sidebar {
-            height: 100%;
-            width: var(--sidebar-width);
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: var(--bg-color);
-            overflow-x: hidden;
-            transition: 0.3s;
-            padding-top: 20px;
-            color: white;
-            z-index: 1000;
-        }
-
-        .sidebar.collapsed {
-            width: var(--collapsed-width);
-        }
-
-        .sidebar.collapsed .sidebar-header {
-            padding: 15px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .sidebar.collapsed .nav-text,
-        .sidebar.collapsed .brand-name,
-        .sidebar.collapsed .new-goal-btn span {
-            display: none;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .logo-placeholder {
-            width: 40px;
-            height: 40px;
-            background: #fff;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-        }
-
-        .nav-items {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
-        .nav-item {
-            padding: 15px 25px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: 0.2s;
-        }
-
-        .nav-item:hover {
-            background-color: #34495e;
-        }
-
-        /* Improved Main Content */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 20px;
-            transition: margin-left 0.3s;
-            max-width: 1200px;
-            margin-right: auto;
-        }
-
-        .main-content.collapsed {
-            margin-left: var(--collapsed-width);
-        }
-
-        /* Project Header */
-        .progress-header {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-
-        .project-title {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .project-meta {
-            font-size: 0.9rem;
-            color: #666;
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-        }
-
-        /* Enhanced Progress Section */
-        .progress-bar {
-            height: 25px;
-            background-color: #f0f0f0;
-            border-radius: 15px;
-            margin: 15px 0;
-            overflow: hidden;
-        }
-
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
-            transition: width 0.5s ease;
-        }
-
-        /* Update Section */
-        .update-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .update-button {
-            padding: 15px 30px;
-            width: 280px;
-            background: var(--success-color);
-            font-weight: bold;
-        }
-
-        .progress-counter {
-            color: #666;
-            font-size: 0.9em;
-            margin-left: 20px;
-        }
-
-        /* Notification Panel */
-        .notification-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--danger-color);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        /* Balance & Interactive Elements */
-        .balance {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            background: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-
-        /* Comment Section */
-        .comment-section {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .comment {
-            margin: 10px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-
-        /* Modal & Form Elements */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-            z-index: 100;
-            max-width: 500px;
-            width: 90%;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-
-        /* Toggle Button */
-        .toggle-btn {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 10px;
-        }
-
-        .new-goal-btn {
-            position: absolute;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <title>Goal Achiever</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-placeholder"></div>
             <h2 class="brand-name">Conv</h2>
         </div>
-        
         <ul class="nav-items">
-            <li class="nav-item">
-                <span class="nav-text">Spectate</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-text">My Profile</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-text">My Goals</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-text">My Earnings</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-text">Analytics</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-text">Settings</span>
-            </li>
+            <li class="nav-item">Spectate</li>
+            <li class="nav-item">My Profile</li>
+            <li class="nav-item"><a href="goals.html">My Goals</a></li>
+            <li class="nav-item">My Earnings</li>
+            <li class="nav-item">Analytics</li>
+            <li class="nav-item">Settings</li>
         </ul>
-
-        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        <button class="new-goal-btn" onclick="showCreateModal()">
-            <span>+</span>
-        </button>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content" id="mainContent">
         <div class="balance">
             My Balance: $<span id="balance">0.00</span>
         </div>
 
-        <!-- Progress Header -->
         <div class="progress-header">
-            <div class="project-title">Complete Web Development Project [E3.0.8]</div>
+            <h2 class="project-title" id="pinnedGoalName"></h2>
             <div class="project-meta">
-                <div>Start Date: March 1, 2024</div>
-                <div class="progress-counter">Progress Updates: <span id="updateCount">0</span>/10</div>
+                <div>Start: <span id="startDate"></span></div>
+                <div>Days: <span id="daysElapsed"></span></div>
+                <div>End: <span id="endDate"></span></div>
+                <div>Updates: <span id="progressCount"></span></div>
             </div>
             <div class="progress-bar">
-                <div class="progress" style="width: 30%"></div>
+                <div class="progress"></div>
             </div>
         </div>
 
-        <!-- Update Section -->
         <div class="update-section">
-            <button class="update-button" onclick="requestCameraAccess()">
-                UPDATE YOUR PROGRESS
-            </button>
-            <div class="progress-counter">
-                Pending Updates: <span id="pendingUpdates">1</span>
+            <button class="update-button" onclick="updateProgress()">UPDATE YOUR PROGRESS</button>
+        </div>
+
+        <div class="comment-section" id="commentSection">
+            <h4>Comments</h4>
+            <div class="comment-input-group">
+                <input type="text" id="commentInput" placeholder="Add a comment...">
+                <button onclick="postComment()">Post</button>
+                <button class="anonymous-btn" onclick="postComment(true)">Post Anonymously</button>
             </div>
         </div>
 
-        <!-- Notification Panel -->
-        <div class="notification-panel" id="notificationPanel">
-            You have 1 pending progression update!
-        </div>
-
-        <!-- Interaction Section -->
-        <div class="comment-section">
-            <h4>Comments (3)</h4>
-            <div class="comment">
-                <strong>John:</strong> Great progress! Keep it up!
-            </div>
-            <div class="comment">
-                <strong>Sarah:</strong> Looking forward to the final result!
-            </div>
-            <input type="text" placeholder="Add a comment..." id="commentInput">
-            <button onclick="postComment()">Post Comment</button>
-        </div>
-
-        <!-- Create Goal Modal -->
         <div class="modal" id="createModal">
             <h2>Create New Goal</h2>
-            <input type="text" placeholder="Goal Title" id="goalTitle" class="form-input">
-            <textarea placeholder="Goal Description" id="goalDesc" class="form-input" rows="4"></textarea>
-            <div style="margin-top: 20px; text-align: right;">
-                <button onclick="createNewGoal()">Create Goal</button>
-                <button onclick="hideCreateModal()" style="margin-left: 10px; background: var(--danger-color)">Cancel</button>
+            <input type="text" id="goalName" placeholder="Goal Name" class="form-input">
+            <input type="date" id="startDate" class="form-input">
+            <input type="date" id="endDate" class="form-input">
+            <textarea id="goalDescription" class="form-input" placeholder="Description"></textarea>
+            <div class="modal-actions">
+                <button onclick="createGoal()">Create</button>
+                <button onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Sidebar Management
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('mainContent');
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('collapsed');
-            
-            const toggleBtn = document.querySelector('.toggle-btn');
-            toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '»' : '☰';
-        }
-
-        // Progress Management
-        let balance = 0.00;
-        let currentProgress = 30;
-        let updateCount = 0;
-        const maxUpdates = 10;
-
-        function requestCameraAccess() {
-            // For actual camera access you'll need HTTPS
-            alert("Camera access requested - this would trigger device camera in production");
-            updateCount = Math.min(updateCount + 1, maxUpdates);
-            document.getElementById('updateCount').textContent = updateCount;
-            document.getElementById('pendingUpdates').textContent = maxUpdates - updateCount;
-            
-            if(maxUpdates - updateCount <= 0) {
-                document.getElementById('notificationPanel').style.display = 'none';
-            }
-        }
-
-        // Goal Management
-        function showCreateModal() {
-            document.getElementById('createModal').style.display = 'block';
-        }
-
-        function hideCreateModal() {
-            document.getElementById('createModal').style.display = 'none';
-        }
-
-        function createNewGoal() {
-            const title = document.getElementById('goalTitle').value;
-            const desc = document.getElementById('goalDesc').value;
-            if(title) {
-                // Add goal creation logic here
-                hideCreateModal();
-            }
-        }
-
-        // Donation System
-        function makeDonation() {
-            const amount = parseFloat(document.getElementById('donateAmount').value);
-            if (amount > balance) {
-                alert('Insufficient balance!');
-                return;
-            }
-            if(amount > 0) {
-                balance -= amount;
-                document.getElementById('balance').textContent = balance.toFixed(2);
-                alert(`Thank you for donating $${amount}!`);
-            }
-        }
-
-        // Comment System
-        function postComment() {
-            const commentInput = document.getElementById('commentInput');
-            const commentText = commentInput.value.trim();
-            if (commentText) {
-                const commentSection = document.querySelector('.comment-section');
-                const newComment = document.createElement('div');
-                newComment.className = 'comment';
-                newComment.innerHTML = `<strong>You:</strong> ${commentText}`;
-                commentSection.insertBefore(newComment, commentSection.lastElementChild);
-                commentInput.value = '';
-            }
-        }
-
-        // Modal Close Logic
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = 'none';
-            }
-        }
-    </script>
+    <button class="new-goal-btn" onclick="showCreateModal()">+</button>
+    <script src="app.js"></script>
 </body>
 </html>
