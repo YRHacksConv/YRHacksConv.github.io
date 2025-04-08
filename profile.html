@@ -4,7 +4,53 @@
     <meta charset="UTF-8">
     <title>My Profile</title>
     <style>
-        /* Add profile-specific styles */
+        /* Main layout styles */
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+        }
+
+        /* Updated sidebar styling matching second screenshot */
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background-color: #ffffff;
+            padding: 30px 25px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .brand-header {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .nav-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-item {
+            margin: 18px 0;
+        }
+
+        .nav-item a {
+            color: #444;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            color: #2A3F54;
+        }
+
+        /* Profile content styles (unchanged layout) */
         .profile-container {
             max-width: 800px;
             margin: 0 auto;
@@ -17,6 +63,12 @@
         .profile-name {
             font-size: 24px;
             margin-bottom: 10px;
+            color: #333;
+        }
+
+        .intro-text {
+            color: #666;
+            margin-bottom: 20px;
         }
 
         .profile-section {
@@ -30,57 +82,66 @@
         .section-title {
             font-size: 18px;
             margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .intro-text {
-            color: #666;
-            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
         }
 
         .update-button {
-            background: #4CAF50;
+            background: #2A3F54;
             color: white;
             border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .track-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 8px;
-            background: #f8f8f8;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2A3F54;
+            width: 65%;
         }
 
         .warning-item {
-            color: #ff4444;
-            margin-bottom: 10px;
-        }
-
-        .motivational-message {
-            background: #f0faff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
+            color: #cc0000;
+            margin-bottom: 8px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <!-- Dark blue sidebar -->
+    <!-- Updated sidebar matching second screenshot style -->
     <nav class="sidebar">
+        <div class="brand-header">Conv</div>
         <ul class="nav-items">
             <li class="nav-item"><a href="index.html">Home</a></li>
             <li class="nav-item"><a href="forum.html">Forum</a></li>
-            <li class="nav-item"><a href="profile.html" class="active">My Profile</a></li>
+            <li class="nav-item"><a href="profile.html">My Profile</a></li>
             <li class="nav-item"><a href="goals.html">My Goals</a></li>
             <li class="nav-item"><a href="analytics.html">Analytics</a></li>
         </ul>
     </nav>
 
-    <!-- Main content -->
+    <!-- Main content (unchanged layout) -->
     <div class="main-content">
         <div class="profile-container">
             <div class="profile-header">
@@ -100,7 +161,7 @@
                     <h3>My Progress</h3>
                     <div class="progress-container">
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 65%"></div>
+                            <div class="progress-fill"></div>
                         </div>
                         <span>65%</span>
                     </div>
@@ -108,16 +169,8 @@
                 
                 <div class="track-item">
                     <h3>Received Warnings</h3>
-                    <div class="warning-item"> Missing progress update</div>
-                    <div class="warning-item"> Deadline approaching</div>
-                </div>
-            </div>
-
-            <div class="profile-section">
-                <h2 class="section-title">My Profile</h2>
-                <div class="motivational-message">
-                    <p>A: Great Job</p>
-                    <p>B: Let's go!!!</p>
+                    <div class="warning-item">Missing progress update</div>
+                    <div class="warning-item">Deadline approaching</div>
                 </div>
             </div>
         </div>
