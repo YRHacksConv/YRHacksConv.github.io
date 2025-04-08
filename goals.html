@@ -5,7 +5,11 @@
     <title>My Goals</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional spacing for goals list */
+        .goals-header h1 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
         #goalsContainer {
             margin-top: 30px;
             display: grid;
@@ -14,21 +18,35 @@
         
         .goal-card {
             padding: 25px;
-            position: relative;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .goal-card h3 {
             margin-bottom: 15px;
-            color: var(--primary-color);
+            color: #4a90e2;
         }
 
-        /* Increased spacing between progress bar and button */
         .update-button {
-            margin-top: 30px !important;
+            margin-top: 30px;
         }
 
         .progress-bar {
             margin-bottom: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            z-index: 1001;
         }
     </style>
 </head>
@@ -73,7 +91,7 @@
             <textarea id="goalDescription" class="form-input" placeholder="Description (optional)"></textarea>
             <div class="modal-actions">
                 <button onclick="createGoal()">Create Goal</button>
-                <button class="cancel-btn" onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
+                <button class="cancel-btn" onclick="hideCreateModal()">Cancel</button>
             </div>
         </div>
     </div>
