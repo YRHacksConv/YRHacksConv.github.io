@@ -5,11 +5,7 @@
     <title>My Goals</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .goals-header h1 {
-            color: #4a90e2;
-            margin-bottom: 20px;
-        }
-
+        /* Additional spacing for goals list */
         #goalsContainer {
             margin-top: 30px;
             display: grid;
@@ -18,35 +14,12 @@
         
         .goal-card {
             padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
         }
         
         .goal-card h3 {
             margin-bottom: 15px;
-            color: #4a90e2;
-        }
-
-        .update-button {
-            margin-top: 30px;
-        }
-
-        .progress-bar {
-            margin-bottom: 20px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-            z-index: 1001;
+            color: var(--primary-color);
         }
     </style>
 </head>
@@ -68,7 +41,9 @@
                 <li class="nav-item"><a href="spectate.html">Spectate</a></li>
                 <li class="nav-item"><a href="profile.html">My Profile</a></li>
                 <li class="nav-item active"><a href="goals.html">My Goals</a></li>
+                <li class="nav-item"><a href="earnings.html">My Earnings</a></li>
                 <li class="nav-item"><a href="analytics.html">Analytics</a></li>
+                <li class="nav-item"><a href="settings.html">Settings</a></li>
             </ul>
         </nav>
     </div>
@@ -91,7 +66,7 @@
             <textarea id="goalDescription" class="form-input" placeholder="Description (optional)"></textarea>
             <div class="modal-actions">
                 <button onclick="createGoal()">Create Goal</button>
-                <button class="cancel-btn" onclick="hideCreateModal()">Cancel</button>
+                <button class="cancel-btn" onclick="document.getElementById('createModal').style.display = 'none'">Cancel</button>
             </div>
         </div>
     </div>
