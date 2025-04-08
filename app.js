@@ -1,7 +1,7 @@
 // ======================= STATE MANAGEMENT =======================  
 let state = {  
     goals: JSON.parse(localStorage.getItem('goals')) || [],  
-    balance: 0,  
+    balance: Number(localStorage.getItem('balance')) || 0,  
     pendingUpdates: JSON.parse(localStorage.getItem('pendingUpdates')) || 0  
 };  
 
@@ -14,33 +14,43 @@ function init() {
     renderGoals();  
     updateUI();  
     showWelcomeNotification();  
+    initializeSidebar();
 }  
 
+function initializeSidebar() {
+    // Sidebar toggle functionality
+    document.querySelector('.toggle-btn').addEventListener('click', toggleSidebar);
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.sidebar') && !e.target.closest('.toggle-btn')) {
+            document.getElementById('sidebar').classList.remove('collapsed');
+        }
+    });
+}
+
 function renderGoals() {  
-    if (!document.getElementById('goalsContainer')) return;  
-
     const container = document.getElementById('goalsContainer');  
-    container.innerHTML = '';  
+    if (!container) return;  
 
-    // DUPLICATE PREVENTION - NEW CODE
-    const uniqueGoals = [...new Map(
-        state.goals.map(goal => [goal.id, goal])
-    ).values()];
+    container.innerHTML = '';  
+    const uniqueGoals = [...new Map(state.goals.map(goal => [goal.id, goal])).values()];  
 
     uniqueGoals.forEach(goal => {  
-        const daysElapsed = Math.floor((new Date() - new Date(goal.startDate)) / (1000 * 60 * 60 * 24));  
+        const daysElapsed = calculateDaysElapsed(goal.startDate);  
+        const progressWidth = calculateProgress(goal.startDate, goal.endDate);  
+
         const goalCard = document.createElement('div');  
         goalCard.className = `goal-card ${goal.pinned ? 'pinned-goal' : ''}`;  
         goalCard.innerHTML = `  
             <h3>${goal.name}</h3>  
             <div class="project-meta">  
-                <div>Starting date: ${new Date(goal.startDate).toLocaleDateString()}</div>  
-                <div>Time elapsed: ${daysElapsed} days</div>  
-                <div>End date: ${new Date(goal.endDate).toLocaleDateString()}</div>  
-                <div>Revenue: $${(goal.updates.length * 5).toFixed(2)}</div>  
+                <div>Start: ${formatDate(goal.startDate)}</div>  
+                <div>Days: ${daysElapsed}</div>  
+                <div>End: ${formatDate(goal.endDate)}</div>  
+                <div>Revenue: $${calculateRevenue(goal.updates)}</div>  
             </div>  
             <div class="progress-bar">  
-                <div class="progress" style="width: ${(daysElapsed / goal.totalDays) * 100}%"></div>  
+                <div class="progress" style="width: ${progressWidth}%"></div>  
             </div>  
             <button class="update-button" onclick="updateProgress('${goal.id}')">  
                 UPDATE PROGRESS  
@@ -51,69 +61,97 @@ function renderGoals() {
     });  
 }  
 
-// ======================= ACTIVE PAGE HIGHLIGHTING =======================  
-function setActivePage() {  
-    const currentPage = window.location.pathname.split("/").pop();  
-    document.querySelectorAll('.nav-item a').forEach(link => {  
-        link.parentElement.classList.toggle('active', link.getAttribute('href') === currentPage);  
+// ======================= UTILITY FUNCTIONS =======================  
+function calculateDaysElapsed(startDate) {
+    return Math.floor((new Date() - new Date(startDate)) / (1000 * 60 * 60 * 24));  
+}  
+
+function calculateProgress(start, end) {
+    const total = (new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24);  
+    const elapsed = (new Date() - new Date(start)) / (1000 * 60 * 60 * 24);  
+    return Math.min((elapsed / total) * 100, 100);  
+}  
+
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString('en-US', {  
+        month: 'short',  
+        day: 'numeric',  
+        year: 'numeric'  
     });  
 }  
 
-// ======================= UI UPDATES =======================  
-function updateUI() {  
-    document.getElementById('balance').textContent = state.balance.toFixed(2);  
-    document.getElementById('pendingBadge').textContent = state.pendingUpdates || '';  
-    document.getElementById('revenue').textContent = state.balance.toFixed(2);  
-
-    const pinnedGoal = state.goals.find(g => g.pinned);  
-    if (pinnedGoal) {  
-        const daysElapsed = Math.floor((new Date() - new Date(pinnedGoal.startDate)) / (1000 * 60 * 60 * 24));  
-        document.getElementById('pinnedGoalName').textContent = pinnedGoal.name;  
-        document.getElementById('startDate').textContent = new Date(pinnedGoal.startDate).toLocaleDateString();  
-        document.getElementById('endDate').textContent = new Date(pinnedGoal.endDate).toLocaleDateString();  
-        document.getElementById('daysElapsed').textContent = daysElapsed;  
-        document.querySelector('.progress').style.width = `${(daysElapsed / pinnedGoal.totalDays) * 100}%`;  
-    }  
+function calculateRevenue(updates) {
+    return (updates.length * 5).toFixed(2);  
 }  
 
-// ======================= MODAL SYSTEM =======================  
+// ======================= GOAL CREATION SYSTEM =======================  
 function showCreateModal() {  
     document.getElementById('createModal').style.display = 'block';  
+    document.querySelector('.modal-backdrop').style.display = 'block';  
 }  
 
 function hideCreateModal() {  
     document.getElementById('createModal').style.display = 'none';  
+    document.querySelector('.modal-backdrop').style.display = 'none';  
+    clearForm();  
 }  
 
-// ======================= GOAL MANAGEMENT =======================  
 function createGoal() {  
-    const name = document.getElementById('goalName').value;  
-    const startDate = document.getElementById('startDate').value;  
-    const endDate = document.getElementById('endDate').value;  
-    const description = document.getElementById('goalDescription').value;  
+    const formElements = {  
+        name: document.getElementById('goalName'),  
+        startDate: document.getElementById('startDate'),  
+        endDate: document.getElementById('endDate'),  
+        description: document.getElementById('goalDescription')  
+    };  
 
-    const totalDays = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24);  
+    if (!validateGoalForm(formElements)) return;  
 
     const newGoal = {  
         id: Date.now().toString(),  
-        name,  
-        startDate,  
-        endDate,  
-        description,  
-        totalDays,  
+        name: formElements.name.value.trim(),  
+        startDate: formElements.startDate.value,  
+        endDate: formElements.endDate.value,  
+        description: formElements.description.value.trim(),  
+        totalDays: calculateTotalDays(formElements.startDate.value, formElements.endDate.value),  
         updates: [],  
         pinned: state.goals.length === 0  
     };  
 
     state.goals.push(newGoal);  
-    localStorage.setItem('goals', JSON.stringify(state.goals));  
-
-    updateUI();  
+    saveState();  
     hideCreateModal();  
     renderGoals();  
+    updateUI();  
 }  
 
-// ======================= CAMERA HANDLING =======================  
+function validateGoalForm({name, startDate, endDate}) {  
+    if (!name.value.trim()) {  
+        showNotification('Goal name is required', 'danger');  
+        return false;  
+    }  
+    if (!startDate.value || !endDate.value) {  
+        showNotification('Dates are required', 'danger');  
+        return false;  
+    }  
+    if (new Date(startDate.value) > new Date(endDate.value)) {  
+        showNotification('End date must be after start date', 'danger');  
+        return false;  
+    }  
+    return true;  
+}  
+
+function calculateTotalDays(start, end) {  
+    return Math.ceil((new Date(end) - new Date(start)) / (1000 * 60 * 60 * 24));  
+}  
+
+function clearForm() {  
+    document.getElementById('goalName').value = '';  
+    document.getElementById('startDate').value = '';  
+    document.getElementById('endDate').value = '';  
+    document.getElementById('goalDescription').value = '';  
+}  
+
+// ======================= PROGRESS SYSTEM =======================  
 async function handleCameraAccess(goalId) {  
     try {  
         cameraStream = await navigator.mediaDevices.getUserMedia({  
@@ -133,43 +171,46 @@ async function handleCameraAccess(goalId) {
 
 function completeProgressUpdate(goalId) {  
     const goal = state.goals.find(g => g.id === goalId);  
+    if (!goal) return;  
+
     goal.updates.push(new Date().toISOString());  
     state.pendingUpdates++;  
     state.balance += 5.00;  
-
-    localStorage.setItem('goals', JSON.stringify(state.goals));  
-    localStorage.setItem('pendingUpdates', state.pendingUpdates);  
-    localStorage.setItem('balance', state.balance);  
-
+    saveState();  
     updateUI();  
     renderGoals();  
     showNotification('Progress verified!', 'success');  
 }  
 
-// ======================= PROGRESS SYSTEM =======================  
 function updateProgress(goalId) {  
-    if (!goalId) {  
-        const pinnedGoal = state.goals.find(g => g.pinned);  
-        goalId = pinnedGoal?.id || 'example';  
-    }  
-    handleCameraAccess(goalId);  
+    const targetGoal = goalId ? state.goals.find(g => g.id === goalId) : state.goals.find(g => g.pinned);  
+    if (!targetGoal) return;  
+    handleCameraAccess(targetGoal.id);  
 }  
 
-// ======================= COMMENT SYSTEM =======================  
-function postComment(anonymous = false) {  
-    const input = document.getElementById('commentInput');  
-    const comment = input.value.trim();  
+// ======================= UI SYSTEM =======================  
+function updateUI() {  
+    // Balance updates  
+    document.getElementById('balance').textContent = state.balance.toFixed(2);  
+    document.getElementById('revenue').textContent = state.balance.toFixed(2);  
 
-    if (comment) {  
-        const author = anonymous ? 'Anonymous' : 'You';  
-        const commentSection = document.getElementById('commentSection');  
-        commentSection.innerHTML += `  
-            <div class="comment">  
-                <strong>${author}:</strong> ${comment}  
-            </div>  
-        `;  
-        input.value = '';  
+    // Pinned goal updates  
+    const pinnedGoal = state.goals.find(g => g.pinned);  
+    if (pinnedGoal) {  
+        const daysElapsed = calculateDaysElapsed(pinnedGoal.startDate);  
+        document.getElementById('pinnedGoalName').textContent = pinnedGoal.name;  
+        document.getElementById('startDate').textContent = formatDate(pinnedGoal.startDate);  
+        document.getElementById('endDate').textContent = formatDate(pinnedGoal.endDate);  
+        document.getElementById('daysElapsed').textContent = daysElapsed;  
+        document.querySelector('.progress').style.width = `${calculateProgress(pinnedGoal.startDate, pinnedGoal.endDate)}%`;  
     }  
+}  
+
+function setActivePage() {  
+    const currentPage = window.location.pathname.split("/").pop();  
+    document.querySelectorAll('.nav-item a').forEach(link => {  
+        link.parentElement.classList.toggle('active', link.getAttribute('href') === currentPage);  
+    });  
 }  
 
 // ======================= NOTIFICATION SYSTEM =======================  
@@ -186,9 +227,16 @@ function showWelcomeNotification() {
         showNotification('1 pending update needs verification', 'danger');  
         localStorage.setItem('firstVisit', 'true');  
         state.pendingUpdates = 1;  
-        localStorage.setItem('pendingUpdates', state.pendingUpdates);  
+        saveState();  
         updateUI();  
     }  
+}  
+
+// ======================= STATE PERSISTENCE =======================  
+function saveState() {  
+    localStorage.setItem('goals', JSON.stringify(state.goals));  
+    localStorage.setItem('balance', state.balance);  
+    localStorage.setItem('pendingUpdates', state.pendingUpdates);  
 }  
 
 // ======================= SIDEBAR SYSTEM =======================  
