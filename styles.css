@@ -361,3 +361,63 @@ body {
 .toggle-btn {  
   display: none;  
 }
+
+/* ======== QUICK FIXES FOR OVERSIZED ELEMENTS ======== */
+/* Base font size reduction */
+body {
+  font-size: 14px !important;
+}
+
+/* Header sizing fixes */
+.brand-name {
+  font-size: 1.2rem !important;
+  margin: 10px 0 !important;
+}
+
+/* Navigation menu fixes */
+.nav-items {
+  font-size: 0.9rem !important;
+  padding-left: 15px !important;
+}
+
+.nav-item {
+  padding: 8px 15px !important;
+}
+
+/* Goal section sizing */
+.example-goal {
+  padding: 20px !important;
+  min-height: auto !important;
+}
+
+.example-goal h2 {
+  font-size: 1.3rem !important;
+  margin-bottom: 10px !important;
+}
+
+/* Progress section fixes */
+.update-button {
+  margin-top: 20px !important;
+  padding: 10px 20px !important;
+  font-size: 0.9rem !important;
+}
+
+.progress-bar {
+  margin: 10px 0 20px 0 !important;
+  height: 20px !important;
+}
+
+/* Comments section fixes */
+.comment-section h4 {
+  font-size: 1rem !important;
+}
+
+.comment-input-group input {
+  padding: 8px !important;
+  font-size: 0.9rem !important;
+}
+
+.comment-btn {
+  padding: 8px 15px !important;
+  font-size: 0.85rem !important;
+}
