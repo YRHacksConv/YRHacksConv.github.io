@@ -12,13 +12,13 @@
             display: flex;
         }
 
-        /* Sidebar styling */
+        /* Dark blue sidebar styling */
         .sidebar {
-            width: 200px;
+            width: 240px;
             height: 100vh;
-            background-color: #ffffff;
-            padding: 30px 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            background-color: #2A3F54;
+            padding: 25px 0;
+            color: white;
         }
 
         .nav-items {
@@ -28,18 +28,20 @@
         }
 
         .nav-item {
-            margin: 15px 0;
+            padding: 12px 30px;
+            transition: all 0.3s ease;
         }
 
         .nav-item a {
-            color: #333;
+            color: #E4E7EA;
             text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            display: block;
         }
 
-        .nav-item a:hover {
-            color: #4CAF50;
+        .nav-item:hover {
+            background-color: #1A2A38;
         }
 
         /* Main content area */
@@ -48,7 +50,7 @@
             padding: 40px;
         }
 
-        /* Forum cards styling */
+        /* Forum cards styling (kept from previous version) */
         .forum-card {
             background: white;
             border-radius: 12px;
@@ -110,11 +112,11 @@
     </style>
 </head>
 <body>
-    <!-- Sidebar from second screenshot -->
+    <!-- Dark blue sidebar -->
     <nav class="sidebar">
         <ul class="nav-items">
             <li class="nav-item"><a href="index.html">Home</a></li>
-            <li class="nav-item"><a href="spectate.html">Forum</a></li>
+            <li class="nav-item"><a href="forum.html">Forum</a></li>
             <li class="nav-item"><a href="profile.html">My Profile</a></li>
             <li class="nav-item"><a href="goals.html">My Goals</a></li>
             <li class="nav-item"><a href="analytics.html">Analytics</a></li>
