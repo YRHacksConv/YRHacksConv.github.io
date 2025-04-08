@@ -321,3 +321,10 @@ h1, .header-title {
   text-decoration: none !important;
   border-bottom: none !important;
 }
+
+.logo-image {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Keep square for best results */
+    object-fit: contain; /* Prevents image distortion */
+    margin-right: 10px; /* Space between logo and text */
+}
