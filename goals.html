@@ -3,87 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <title>My Goals</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional spacing adjustments */
-        #goalsContainer {
-            margin-top: 30px;
-            display: grid;
-            gap: 25px;
-        }
-        
-        .goal-card {
-            padding: 25px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        
-        .goal-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
         }
 
-        /* Increased spacing between progress bar and button */
-        .update-button {
-            margin-top: 40px !important;
+        /* Dark Blue Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #2A3F54;
+            padding: 30px;
+            color: white;
         }
 
-        .progress-bar {
+        .nav-items {
+            list-style: none;
+            padding: 0;
+            margin-top: 40px;
+        }
+
+        .nav-item {
             margin: 25px 0;
         }
 
-        /* Remove mobile goal creation button */
-        .new-goal-btn.mobile {
-            display: none !important;
+        .nav-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .goal-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .goal-header {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .goal-details {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* New Progress Bar Styles */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2196F3;
+            width: 65%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percent {
+            color: #2196F3;
+            font-weight: 500;
+        }
+
+        .update-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            margin-top: 15px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <a href="index.html" class="logo-link">
-                <div class="logo-placeholder"></div>
-                <h2 class="brand-name">Conv</h2>
-            </a>
-            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
-        </div>
+    <!-- Dark Blue Sidebar -->
+    <nav class="sidebar">
+        <h2>Conv</h2>
+        <ul class="nav-items">
+            <li class="nav-item"><a href="#">Home</a></li>
+            <li class="nav-item"><a href="#">Spectate</a></li>
+            <li class="nav-item"><a href="#">My Profile</a></li>
+            <li class="nav-item"><a href="#">My Goals</a></li>
+            <li class="nav-item"><a href="#">Analytics</a></li>
+        </ul>
+    </nav>
 
-        <nav class="nav-items">
-            <ul>
-                <li class="nav-item"><a href="index.html">Home</a></li>
-                <li class="nav-item"><a href="spectate.html">Spectate</a></li>
-                <li class="nav-item"><a href="profile.html">My Profile</a></li>
-                <li class="nav-item active"><a href="goals.html">My Goals</a></li>
-                <li class="nav-item"><a href="analytics.html">Analytics</a></li>
-            </ul>
-        </nav>
-    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>My Goals</h1>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content" id="mainContent">
-        <div class="goals-header">
-            <h1>My Goals</h1>
-        </div>
-        
-        <div id="goalsContainer"></div>
-
-        <!-- CREATE GOAL MODAL -->
-        <div class="modal" id="createModal">
-            <h2>Create New Goal</h2>
-            <input type="text" id="goalName" placeholder="Goal Name" class="form-input" required>
-            <input type="date" id="startDate" class="form-input" required>
-            <input type="date" id="endDate" class="form-input" required>
-            <textarea id="goalDescription" class="form-input" placeholder="Description (optional)"></textarea>
-            <div class="modal-actions">
-                <button onclick="createGoal()">Create Goal</button>
-                <button class="cancel-btn" onclick="hideCreateModal()">Cancel</button>
+        <!-- Goal 1 -->
+        <div class="goal-section">
+            <div class="goal-header">Project Alpha</div>
+            <div class="goal-details">
+                <div>Start: 2024-04-01</div>
+                <div>End: 2024-06-30</div>
+                <div>Days: 45</div>
+                <div>Revenue: $5,000.00</div>
             </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <span class="progress-percent">65%</span>
+            </div>
+            <button class="update-button">UPDATE PROGRESS</button>
+        </div>
+
+        <!-- Goal 2 -->
+        <div class="goal-section">
+            <div class="goal-header">Fitness Challenge</div>
+            <div class="goal-details">
+                <div>Start: 2024-03-15</div>
+                <div>End: 2024-05-15</div>
+                <div>Days: 25</div>
+                <div>Revenue: $1,200.00</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 30%"></div>
+                </div>
+                <span class="progress-percent">30%</span>
+            </div>
+            <button class="update-button">UPDATE PROGRESS</button>
+        </div>
+
+        <!-- Goal 3 -->
+        <div class="goal-section">
+            <div class="goal-header">E-commerce Launch</div>
+            <div class="goal-details">
+                <div>Start: 2024-05-01</div>
+                <div>End: 2024-08-31</div>
+                <div>Days: 122</div>
+                <div>Revenue: $10,000.00</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+                <span class="progress-percent">85%</span>
+            </div>
+            <button class="update-button">UPDATE PROGRESS</button>
         </div>
     </div>
-
-    <script src="app.js"></script>
 </body>
 </html>
