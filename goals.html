@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Goals - Goal Achiever</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-placeholder"></div>
+            <h2 class="brand-name">Conv</h2>
+        </div>
+        
+        <ul class="nav-items">
+            <li class="nav-item"><span class="nav-text">Spectate</span></li>
+            <li class="nav-item"><span class="nav-text">My Profile</span></li>
+            <li class="nav-item"><a href="goals.html" class="nav-text">My Goals</a></li>
+            <li class="nav-item"><span class="nav-text">My Earnings</span></li>
+            <li class="nav-item"><span class="nav-text">Analytics</span></li>
+            <li class="nav-item"><span class="nav-text">Settings</span></li>
+        </ul>
 
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <button class="new-goal-btn" onclick="showCreateModal()">+</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <h1 class="page-title">My Goals</h1>
+        
+        <!-- Pinned Goal -->
+        <div id="pinnedGoalContainer" class="pinned-goal"></div>
+
+        <!-- Goals List -->
+        <div id="goalsContainer" class="goals-list"></div>
+
+        <!-- Create Goal Modal (same as index.html) -->
+        <div class="modal" id="createModal">
+            <!-- ... same modal content as index.html ... -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
