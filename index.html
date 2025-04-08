@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Goal Achiever</title>
+    <!-- Make sure your file is actually named 'styles.css' (plural)
+         or update the href below to match your actual filename. -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-placeholder"></div>
             <h2 class="brand-name">Conv</h2>
+
+            <!-- Button to toggle sidebar collapse -->
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+            <!-- New Goal (+) button placed here, under the logo -->
+            <button class="new-goal-btn" onclick="showCreateModal()">+</button>
         </div>
         <ul class="nav-items">
             <li class="nav-item">Spectate</li>
             <li class="nav-item">My Profile</li>
-            <li class="nav-item"><a href="goals.html">My Goals</a></li>
+            <!-- "My Goals" link uses same color as other nav items -->
+            <li class="nav-item">
+                <a href="goals.html">My Goals</a>
+            </li>
             <li class="nav-item">My Earnings</li>
             <li class="nav-item">Analytics</li>
             <li class="nav-item">Settings</li>
         </ul>
     </div>
+    <!-- END SIDEBAR -->
 
+    <!-- MAIN CONTENT -->
     <div class="main-content" id="mainContent">
         <div class="balance">
             My Balance: $<span id="balance">0.00</span>
@@ -52,6 +66,7 @@
             </div>
         </div>
 
+        <!-- CREATE NEW GOAL MODAL -->
         <div class="modal" id="createModal">
             <h2>Create New Goal</h2>
             <input type="text" id="goalName" placeholder="Goal Name" class="form-input">
@@ -64,8 +79,8 @@
             </div>
         </div>
     </div>
+    <!-- END MAIN CONTENT -->
 
-    <button class="new-goal-btn" onclick="showCreateModal()">+</button>
     <script src="app.js"></script>
 </body>
 </html>
