@@ -112,9 +112,10 @@ function createGoal() {
         pinned: state.goals.length === 0  
     };  
 
-    // Check for duplicate name
-    if (state.goals.some(goal => goal.name.toLowerCase() === newGoal.name.toLowerCase())) {
-        showNotification('Goal with this name already exists!', 'danger');
+    // Strict duplicate name check
+    const existingNames = state.goals.map(goal => goal.name.trim().toLowerCase());
+    if (existingNames.includes(newGoal.name.toLowerCase())) {
+        showNotification('This goal name already exists! Please use a unique name.', 'danger');
         return;
     }
 
@@ -234,8 +235,8 @@ function showWelcomeNotification() {
 // ======================= STATE PERSISTENCE =======================  
 function saveState() {  
     localStorage.setItem('goals', JSON.stringify(state.goals));  
-    localStorage.setItem('balance', state.balance);  
-    localStorage.setItem('pendingUpdates', state.pendingUpdates);  
+    localStorage.setItem('balance', state.balance.toString());  
+    localStorage.setItem('pendingUpdates', state.pendingUpdates.toString());  
 }  
 
 // ======================= SIDEBAR SYSTEM =======================  
