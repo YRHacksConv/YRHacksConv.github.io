@@ -356,3 +356,85 @@ body {
     background: #333 !important;
     border: 2px solid var(--primary-color) !important;
 }
+
+/* ======== EXISTING CSS ======== */  
+:root {  
+    --primary-color: #4a90e2;  
+    --success-color: #7ed321;  
+    --danger-color: #ff4757;  
+    --bg-color: #2c3e50;  
+    --sidebar-width: 250px;  
+    --collapsed-width: 80px;  
+    --text-color: #333;  
+}  
+
+body {  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    margin: 0;  
+    background: #f5f6fa;  
+    color: var(--text-color);  
+    transition: margin-left 0.3s;  
+}  
+
+.sidebar {  
+    width: var(--sidebar-width);  
+    height: 100vh;  
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    background: var(--bg-color);  
+    color: white;  
+    transition: 0.3s;  
+    overflow-x: hidden;  
+    z-index: 1000;  
+}  
+
+/* ... (all existing styles remain the same) ... */  
+
+.pending-badge {  
+    background: var(--danger-color);  
+    color: white;  
+    padding: 5px 10px;  
+    border-radius: 15px;  
+    margin-left: 10px;  
+    font-size: 0.9em;  
+}  
+
+/* ======== NEW FIXES ======== */  
+/* 1. Sidebar Button Positioning */  
+.sidebar-header {  
+    height: 160px; /* Increased from 120px */  
+    padding: 25px 20px; /* Added vertical padding */  
+}  
+
+.new-goal-btn {  
+    bottom: 80px !important; /* Raised position */  
+    left: 50% !important;  
+    transform: translateX(-50%) !important;  
+    z-index: 1001;  
+}  
+
+.toggle-btn {  
+    bottom: 25px !important; /* Lowered position */  
+    left: 50% !important;  
+    transform: translateX(-50%) !important;  
+}  
+
+.sidebar.collapsed .new-goal-btn {  
+    left: 50% !important; /* Center in collapsed state */  
+}  
+
+/* 2. Progress Bar Spacing */  
+.progress-header {  
+    margin-bottom: 40px; /* Increased from 25px */  
+}  
+
+.update-section {  
+    margin: 40px 0 20px 0; /* Added top margin */  
+}  
+
+/* 3. Active Navigation State */  
+.nav-item.active {  
+    background: #34495e;  
+    border-radius: 8px;  
+}  
