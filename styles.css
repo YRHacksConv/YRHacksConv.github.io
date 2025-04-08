@@ -1,9 +1,10 @@
+/* styles.css - FULL CODE */
 :root {  
     --primary-color: #4a90e2;  
     --success-color: #7ed321;  
     --danger-color: #ff4757;  
-    --bg-color: #2c3e50;  
-    --sidebar-width: 250px;  
+    --bg-color: #2A3F54; /* Changed to match spectate */  
+    --sidebar-width: 280px; /* Updated width */  
     --collapsed-width: 80px;  
     --text-color: #333;  
 }  
@@ -14,6 +15,9 @@ body {
     background: #f5f6fa;  
     color: var(--text-color);  
     transition: margin-left 0.3s;  
+    font-size: 14px !important;  
+    display: flex; /* Added for spectate match */  
+    min-height: 100vh; /* Added for spectate match */  
 }  
 
 /* ======== SIDEBAR SYSTEM ======== */  
@@ -30,6 +34,7 @@ body {
     z-index: 1000;  
     display: flex;  
     flex-direction: column;  
+    padding: 40px 30px !important; /* Spectate addition */  
 }  
 
 .sidebar-header {  
@@ -37,6 +42,7 @@ body {
     text-align: center;  
     min-height: 180px;  
     position: relative;  
+    display: none; /* Spectate fix */  
 }  
 
 .logo-placeholder {  
@@ -45,44 +51,52 @@ body {
     background: #fff;  
     border-radius: 50%;  
     margin: 0 auto 15px;  
+    display: none !important; /* Spectate fix */  
 }  
 
 .brand-name {  
     margin: 0 0 25px 0;  
     font-size: 1.5rem;  
     transition: opacity 0.3s;  
+    display: none !important; /* Spectate fix */  
 }  
 
-.new-goal-btn {  
-    width: 45px;  
-    height: 45px;  
-    border-radius: 50%;  
-    background: var(--primary-color);  
-    color: white;  
-    border: none;  
+/* NEW SPECTATE HEADER */  
+.sidebar > h2 {  
+    color: white !important;  
+    font-size: 2rem !important;  
+    margin: 0 0 40px 0 !important;  
+    display: block !important;  
+}  
+
+.nav-items {  
+    list-style: none;  
+    padding: 0;  
+    margin: 40px 0 !important; /* Spectate fix */  
+    flex-grow: 1;  
+}  
+
+.nav-item {  
+    padding: 0 !important; /* Original: 15px 25px */  
     cursor: pointer;  
-    margin: 0 auto;  
+    transition: 0.2s;  
+    margin: 25px 0 !important; /* Spectate addition */  
+}  
+
+.nav-item a {  
+    color: #E4E7EA !important; /* Spectate color */  
+    text-decoration: none;  
     display: block;  
-    position: relative;  
-    z-index: 1;  
+    width: 100%;  
+    font-size: 16px !important; /* Spectate fix */  
+    font-weight: 500 !important; /* Spectate fix */  
 }  
 
-.toggle-btn {  
-    position: absolute;  
-    bottom: 20px;  
-    left: 50%;  
-    transform: translateX(-50%);  
-    background: var(--primary-color);  
-    color: white;  
-    width: 40px;  
-    height: 40px;  
-    border-radius: 50%;  
-    border: none;  
-    cursor: pointer;  
-    margin-top: auto;  
+.nav-item:hover {  
+    background-color: #34495e;  
 }  
 
-/* Collapsed State */  
+/* Collapsed State - KEPT ORIGINAL */  
 .sidebar.collapsed {  
     width: var(--collapsed-width);  
 }  
@@ -100,50 +114,21 @@ body {
     margin: 10px auto;  
 }  
 
-/* Navigation */  
-.nav-items {  
-    list-style: none;  
-    padding: 0;  
-    margin: 20px 0;  
-    flex-grow: 1;  
-}  
-
-.nav-item {  
-    padding: 15px 25px;  
-    cursor: pointer;  
-    transition: 0.2s;  
-}  
-
-.nav-item:hover {  
-    background-color: #34495e;  
-}  
-
-.nav-item a {  
-    color: inherit;  
-    text-decoration: none;  
-    display: block;  
-    width: 100%;  
-}  
-
-/* Active State */  
-.nav-item.active {  
-    background: #34495e;  
-    border-radius: 8px;  
-}  
-
 /* ======== MAIN CONTENT ======== */  
 .main-content {  
     margin-left: var(--sidebar-width);  
-    padding: 30px;  
+    padding: 50px !important; /* Original: 30px */  
     transition: margin-left 0.3s;  
     min-height: 100vh;  
+    flex: 1; /* Spectate addition */  
 }  
 
 .sidebar.collapsed ~ .main-content {  
     margin-left: var(--collapsed-width);  
 }  
 
-/* ======== GOAL SYSTEM ======== */  
+/* ======== REST OF YOUR ORIGINAL CODE ======== */  
+/* GOAL SYSTEM */  
 .progress-header {  
     background: white;  
     padding: 25px;  
@@ -180,7 +165,7 @@ body {
     transition: width 0.5s ease;  
 }  
 
-/* ======== BUTTONS ======== */  
+/* BUTTONS */  
 .update-section {  
     margin: 40px 0 20px 0;  
 }  
@@ -212,7 +197,7 @@ body {
     border: 2px solid var(--primary-color) !important;  
 }  
 
-/* ======== NOTIFICATION SYSTEM ======== */
+/* NOTIFICATION SYSTEM */
 .notification-panel {
     position: fixed;
     bottom: 30px;
@@ -244,7 +229,7 @@ body {
     to { opacity: 0; }
 }
 
-/* ======== MISC COMPONENTS ======== */  
+/* MISC COMPONENTS */  
 .balance {  
     position: fixed;  
     top: 20px;  
@@ -334,47 +319,24 @@ body {
   margin-bottom: 25px;  
 }  
 
-.brand-name {  
-  font-size: 1.5rem;  
-  color: white;  
-  margin: 15px 0 0 0;  
-}  
-
-.logo-placeholder {  
-  display: none !important;  
-}  
-
-.sidebar-header {  
-  padding: 25px 20px;  
-  text-align: center;  
-  position: relative;  
-  min-height: auto;  
-}  
-
 .new-goal-btn {  
   position: absolute;  
   bottom: 20px;  
   left: 50%;  
   transform: translateX(-50%);  
+  display: none !important; /* Spectate fix */  
 }  
 
 .toggle-btn {  
-  display: none;  
+  display: none !important; /* Spectate fix */  
 }
 
-/* ======== QUICK FIXES FOR OVERSIZED ELEMENTS ======== */
-/* Base font size reduction */
-body {
-  font-size: 14px !important;
-}
-
-/* Header sizing fixes */
+/* QUICK FIXES */
 .brand-name {
   font-size: 1.2rem !important;
   margin: 10px 0 !important;
 }
 
-/* Navigation menu fixes */
 .nav-items {
   font-size: 0.9rem !important;
   padding-left: 15px !important;
@@ -384,7 +346,6 @@ body {
   padding: 8px 15px !important;
 }
 
-/* Goal section sizing */
 .example-goal {
   padding: 20px !important;
   min-height: auto !important;
@@ -395,7 +356,6 @@ body {
   margin-bottom: 10px !important;
 }
 
-/* Progress section fixes */
 .update-button {
   margin-top: 20px !important;
   padding: 10px 20px !important;
@@ -407,7 +367,6 @@ body {
   height: 20px !important;
 }
 
-/* Comments section fixes */
 .comment-section h4 {
   font-size: 1rem !important;
 }
